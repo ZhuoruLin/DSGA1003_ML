@@ -24,7 +24,11 @@ def feature_normalization(train, test):
         test_normalized  - test set after normalization
 
     """
-    # TODO
+    # Record the maximun value of each instance in train
+    instances_max = np.apply_along_axis(max,axis=1,arr=train)
+    # Calculate 1/max and convert it into a diagonal matrix
+    multiplier = np.diag(1/instances_max)
+    return np.dot(multiplier,train),np.dot(multiplier,test)
 
 
 ########################################
@@ -42,10 +46,16 @@ def compute_square_loss(X, y, theta):
     Returns:
         loss - the square loss, scalar
     """
+    # I believe the original comment is misleading since our theta should have dimension of num_features+1 in order to include bias terms
+    # The final terms of the theta is the bias terms. And we append integer 1 to X.
     loss = 0 #initialize the square_loss
-    #TODO
-    
-
+    num_instances = X.shape[0]
+    ones = np.ones(num_instances).reshape(num_instances,1)
+    extended_X = np.append(X,ones,axis = 1)
+    predictions = np.dot(extended_X,theta)
+    differences = predictions-y
+    loss = 0.5/(num_instances)*np.dot(differences,differences)
+    return loss
 
 ########################################
 ### compute the gradient of square loss function
@@ -61,9 +71,12 @@ def compute_square_loss_gradient(X, y, theta):
     Returns:
         grad - gradient vector, 1D numpy array of size (num_features)
     """
-    #TODO
-    
-       
+    num_instances = X.shape[0]
+    ones = np.ones(num_instances).reshape(num_instances,1)
+    extended_X = np.append(X,ones,axis = 1)
+    differences = np.dot(extended_X,theta)-y
+    grad = 1.0/num_instances*(np.dot(differences,X))
+    return grad   
         
 ###########################################
 ### Gradient Checker
@@ -105,7 +118,14 @@ def grad_checker(X, y, theta, epsilon=0.01, tolerance=1e-4):
     true_gradient = compute_square_loss_gradient(X, y, theta) #the true gradient
     num_features = theta.shape[0]
     approx_grad = np.zeros(num_features) #Initialize the gradient we approximate
-    #TODO
+    for feature_pos in range(num_features):
+        e_i = np.zeros(num_features)
+        e_i[feature_pos]=1
+        theta_plus = theta + epsilon*e_i
+        theta_minus = theta - epsilon*e_i 
+        approx_grad[feature_pos]=(compute_square_loss(X,y,theta_plus)-compute_square_loss(X,y,theta_minus))/(2*epsilon)
+        distance = np.linalg.norm(approx_grad-true_gradient)
+    return distance<tolerance
     
 #################################################
 ### Generic Gradient Checker
@@ -115,8 +135,17 @@ def generic_gradient_checker(X, y, theta, objective_func, gradient_func, epsilon
     the true gradient for objective_func(X, y, theta).
     Eg: In LSR, the objective_func = compute_square_loss, and gradient_func = compute_square_loss_gradient
     """
-    #TODO
-
+    true_gradient = gradient_func(X,y,theta)
+    num_features = theta.shape[0]
+    approx_grad = np.zeros(num_features)
+    for feature_pos in range(num_features):
+        e_i = np.zeros(num_features)
+        e_i[feature_pos]=1
+        theta_plus = theta + epsilon*e_i
+        theta_minus = theta - epsilon*e_i 
+        approx_grad[feature_pos]=(ojective_func(X,y,theta_plus)-objective_func(X,y,theta_minus))/(2*epsilon)
+        distance = np.linalg.norm(approx_grad-true_gradient)
+    return distance<tolerance
 
 ####################################
 #### Batch Gradient Descent
@@ -141,7 +170,6 @@ def batch_grad_descent(X, y, alpha=0.1, num_iter=1000, check_gradient=False):
     theta_hist = np.zeros((num_iter+1, num_features))  #Initialize theta_hist
     loss_hist = np.zeros(num_iter+1) #initialize loss_hist
     theta = np.ones(num_features) #initialize theta
-    #TODO
 
 ####################################
 ###Q2.4b: Implement backtracking line search in batch_gradient_descent
