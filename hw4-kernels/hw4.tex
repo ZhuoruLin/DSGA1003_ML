@@ -1,0 +1,984 @@
+%% LyX 2.2.2 created this file.  For more info, see http://www.lyx.org/.
+%% Do not edit unless you really know what you are doing.
+\documentclass[ruled]{article}
+\usepackage{courier}
+\usepackage[T1]{fontenc}
+\usepackage[latin9]{inputenc}
+\usepackage[letterpaper]{geometry}
+\geometry{verbose}
+\usepackage{color}
+\usepackage{url}
+\usepackage{algorithm2e}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[unicode=true,
+ bookmarks=false,
+ breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
+ {hyperref}
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
+\providecommand{\LyX}{\texorpdfstring%
+  {L\kern-.1667em\lower.25em\hbox{Y}\kern-.125emX\@}
+  {LyX}}
+%% Special footnote code from the package 'stblftnt.sty'
+%% Author: Robin Fairbairns -- Last revised Dec 13 1996
+\let\SF@@footnote\footnote
+\def\footnote{\ifx\protect\@typeset@protect
+    \expandafter\SF@@footnote
+  \else
+    \expandafter\SF@gobble@opt
+  \fi
+}
+\expandafter\def\csname SF@gobble@opt \endcsname{\@ifnextchar[%]
+  \SF@gobble@twobracket
+  \@gobble
+}
+\edef\SF@gobble@opt{\noexpand\protect
+  \expandafter\noexpand\csname SF@gobble@opt \endcsname}
+\def\SF@gobble@twobracket[#1]#2{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Textclass specific LaTeX commands.
+ \theoremstyle{definition}
+ \newtheorem*{defn*}{\protect\definitionname}
+  \theoremstyle{plain}
+  \newtheorem*{thm*}{\protect\theoremname}
+\newenvironment{lyxcode}
+{\par\begin{list}{}{
+\setlength{\rightmargin}{\leftmargin}
+\setlength{\listparindent}{0pt}% needed for AMS classes
+\raggedright
+\setlength{\itemsep}{0pt}
+\setlength{\parsep}{0pt}
+\normalfont\ttfamily}%
+ \item[]}
+{\end{list}}
+
+\@ifundefined{date}{}{\date{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\makeatother
+
+\usepackage{listings}
+\lstset{backgroundcolor={\color{white}},
+basicstyle={\footnotesize\ttfamily},
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+commentstyle={\color{mygreen}},
+deletekeywords={...},
+escapeinside={\%*}{*)},
+extendedchars=true,
+frame=shadowbox,
+keepspaces=true,
+keywordstyle={\color{blue}},
+language=Python,
+morekeywords={*,...},
+numbers=none,
+numbersep=5pt,
+numberstyle={\tiny\color{mygray}},
+rulecolor={\color{black}},
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+stepnumber=1,
+stringstyle={\color{mymauve}},
+tabsize=2}
+  \providecommand{\definitionname}{Definition}
+  \providecommand{\theoremname}{Theorem}
+
+\begin{document}
+\global\long\def\reals{\mathbf{R}}
+ \global\long\def\integers{\mathbf{Z}}
+\global\long\def\naturals{\mathbf{N}}
+ \global\long\def\rationals{\mathbf{Q}}
+\global\long\def\ca{\mathcal{A}}
+\global\long\def\cb{\mathcal{B}}
+ \global\long\def\cc{\mathcal{C}}
+ \global\long\def\cd{\mathcal{D}}
+\global\long\def\ce{\mathcal{E}}
+\global\long\def\cf{\mathcal{F}}
+\global\long\def\cg{\mathcal{G}}
+\global\long\def\ch{\mathcal{H}}
+\global\long\def\ci{\mathcal{I}}
+\global\long\def\cj{\mathcal{J}}
+\global\long\def\ck{\mathcal{K}}
+\global\long\def\cl{\mathcal{L}}
+\global\long\def\cm{\mathcal{M}}
+\global\long\def\cn{\mathcal{N}}
+\global\long\def\co{\mathcal{O}}
+\global\long\def\cp{\mathcal{P}}
+\global\long\def\cq{\mathcal{Q}}
+\global\long\def\calr{\mathcal{R}}
+\global\long\def\cs{\mathcal{S}}
+\global\long\def\ct{\mathcal{T}}
+\global\long\def\cu{\mathcal{U}}
+\global\long\def\cv{\mathcal{V}}
+\global\long\def\cw{\mathcal{W}}
+\global\long\def\cx{\mathcal{X}}
+\global\long\def\cy{\mathcal{Y}}
+\global\long\def\cz{\mathcal{Z}}
+\global\long\def\ind#1{1(#1)}
+\global\long\def\pr{\mathbb{P}}
+
+\global\long\def\var{\textrm{Var}}
+\global\long\def\cov{\textrm{Cov}}
+\global\long\def\sgn{\textrm{sgn}}
+\global\long\def\sign{\textrm{sign}}
+\global\long\def\kl{\textrm{KL}}
+\global\long\def\law{\mathcal{L}}
+\global\long\def\eps{\varepsilon}
+\global\long\def\convd{\stackrel{d}{\to}}
+\global\long\def\eqd{\stackrel{d}{=}}
+\global\long\def\del{\nabla}
+\global\long\def\loss{\ell}
+\global\long\def\tr{\operatorname{tr}}
+\global\long\def\trace{\operatorname{trace}}
+\global\long\def\diag{\text{diag}}
+\global\long\def\rank{\text{rank}}
+\global\long\def\linspan{\text{span}}
+\global\long\def\proj{\text{Proj}}
+\global\long\def\argmax{\operatornamewithlimits{arg\, max}}
+\global\long\def\argmin{\operatornamewithlimits{arg\, min}}
+\global\long\def\bfx{\mathbf{x}}
+\global\long\def\bfy{\mathbf{y}}
+\global\long\def\bfl{\mathbf{\lambda}}
+\global\long\def\bfm{\mathbf{\mu}}
+\global\long\def\calL{\mathcal{L}}
+\global\long\def\vw{\boldsymbol{w}}
+\global\long\def\vx{\boldsymbol{x}}
+\global\long\def\vxi{\boldsymbol{\xi}}
+\global\long\def\valpha{\boldsymbol{\alpha}}
+\global\long\def\vbeta{\boldsymbol{\beta}}
+\global\long\def\vsigma{\boldsymbol{\sigma}}
+\global\long\def\vmu{\boldsymbol{\mu}}
+\global\long\def\vtheta{\boldsymbol{\theta}}
+\global\long\def\vd{\boldsymbol{d}}
+\global\long\def\vs{\boldsymbol{s}}
+\global\long\def\vt{\boldsymbol{t}}
+\global\long\def\vh{\boldsymbol{h}}
+\global\long\def\ve{\boldsymbol{e}}
+\global\long\def\vf{\boldsymbol{f}}
+\global\long\def\vg{\boldsymbol{g}}
+\global\long\def\vz{\boldsymbol{z}}
+\global\long\def\vk{\boldsymbol{k}}
+\global\long\def\va{\boldsymbol{a}}
+\global\long\def\vb{\boldsymbol{b}}
+\global\long\def\vv{\boldsymbol{v}}
+\global\long\def\vy{\boldsymbol{y}}
+\global\long\def\minimizer#1{#1_{*}}
+\global\long\def\ex{\mathbb{E}}
+
+
+\title{Machine Learning and Computational Statistics\\
+Homework 4: Kernel Methods and Lagrangian Duality}
+
+\maketitle
+\textbf{Due: Monday, March 27, 2017, at 10pm (Submit via Gradescope)}
+
+\textbf{Instructions}: Your answers to the questions below, including
+plots and mathematical work, should be submitted as a single PDF file.
+It's preferred that you write your answers using software that typesets
+mathematics (e.g. \LaTeX{}, \LyX{}, or MathJax via iPython), though
+if you need to you may scan handwritten work. You may find the \href{https://github.com/gpoore/minted}{minted}
+package convenient for including source code in your \LaTeX{} document.
+If you are using \LyX{}, then the \href{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}{listings}
+package tends to work better.
+
+\section{Introduction }
+
+The problem set begins with a review of some important linear algebra
+concepts that we routinely use in machine learning and statistics.
+The solutions to each of these problems is at most a few lines long,
+and we've tried to give helpful hints. These aren't meant to be very
+challenging problems \textendash{} in fact, we'd like this material
+to become second nature to you. We next have a couple problems on
+kernel methods: the first explores what geometric information about
+the data is stored in the kernel matrix, and the second revisits kernel
+ridge regression with a direct approach, rather than using the Representer
+Theorem. Next we have an optional problem that explores an interesting
+way to re-express the Pegasos-style SSGD on any $\ell_{2}$ -regularized
+empirical risk objective function. The new expression also happens
+to allow efficient updates in the sparse feature setting. In the next
+required problem, we take a direct approach to kernelizing Pegasos.
+Finally we get to our coding problem, in which you'll have the opportunity
+to see how kernel ridge regression works with different kernels on
+a one-dimensional, highly non-linear regression problem. Optionally,
+we can code a kernelized SVM and see how it works on a classification
+problem with a two-dimensional input space. The problem set ends with
+optional more problems. The first of these reviews the proof of the
+Representer Theorem. The second applies Lagrangian duality to show
+the equivalence of Tikhonov and Ivanov regularization. And the third
+introduces an approach to ``novelty'' or ``anomoly'' detection
+as an exercise in the machinery of Lagrangian duality. 
+
+\section{Positive Semidefinite Matrices}
+
+In statistics and machine learning, we use positive semidefinite matrices
+a lot. Let's recall some definitions from linear algebra that will
+be useful here:
+
+\begin{defn*}
+A set of vectors $\left\{ x_{1},\ldots,x_{n}\right\} $ is \textbf{orthonormal}
+if $\left\langle x_{i},x_{i}\right\rangle =1$ for any $i\in\left\{ 1,\ldots,n\right\} $
+(i.e. $x_{i}$ has unit norm), and for any $i,j\in\left\{ 1,\ldots,n\right\} $
+with $i\neq j$ we have $\left\langle x_{i},x_{j}\right\rangle =0$
+(i.e. $x_{i}$ and $x_{j}$ are orthogonal).
+
+Note that if the vectors are column vectors in a Euclidean space,
+we can write this as $x_{i}^{T}x_{j}=\ind{i\neq j}$ for all $i,j\in\left\{ 1,\ldots,n\right\} $. 
+\end{defn*}
+
+\begin{defn*}
+A matrix is \textbf{orthogonal }if it is a square matrix with orthonormal
+columns. 
+
+It follows from the definition that if a matrix $M\in\reals^{n\times n}$
+is orthogonal, then $M^{T}M=I$, where $I$ is the $n\times n$ identity
+matrix. Thus $M^{T}=M^{-1}$, and so $MM^{T}=I$ as well. 
+\end{defn*}
+
+\begin{defn*}
+A matrix $M$ is \textbf{symmetric }if $M=M^{T}$. 
+\end{defn*}
+
+\begin{defn*}
+For a square matrix $M$, if $Mv=\lambda v$ for some column vector
+$v$ and scalar $\lambda$, then $v$ is called an \textbf{eigenvector}
+of $M$ and $v$ is the corresponding \textbf{eigenvalue}. 
+\end{defn*}
+\begin{thm*}
+[Spectral Theorem]A real, symmetric matrix $M\in\reals^{n\times n}$
+can be diagonalized as $M=Q\Sigma Q^{T}$, where $Q\in\reals^{n\times n}$
+is an orthogonal matrix whose columns are a set of orthonormal eigenvectors
+of $M$, and $\Sigma$ is a diagonal matrix of the corresponding eigenvalues. 
+\end{thm*}
+\begin{defn*}
+A real, symmetric matrix $M\in\reals^{n\times n}$ is \textbf{positive
+semidefinite (psd)} if for any $x\in\reals^{n}$, 
+\[
+x^{T}Mx\ge0.
+\]
+
+Note that unless otherwise specified, when a matrix is described as
+positive semidefinite, we are implicitly assuming it is real and symmetric
+(or complex and Hermitian in certain contexts, though not here).
+
+As an exercise in matrix multiplication, note that for any matrix
+$A$ with columns $a_{1},\ldots,a_{d}$, that is 
+\[
+A=\begin{pmatrix}| &  & |\\
+a_{1} & \cdots & a_{d}\\
+| &  & |
+\end{pmatrix}\in\reals^{n\times d},
+\]
+we have
+\[
+A^{T}MA=\begin{pmatrix}a_{1}^{T}Ma_{1} & a_{1}^{T}Ma_{2} & \cdots & a_{1}^{T}Ma_{d}\\
+a_{2}^{T}Ma_{1} & a_{2}^{T}Ma_{2} & \cdots & a_{2}^{T}Ma_{d}\\
+\vdots & \vdots & \cdots & \vdots\\
+a_{d}^{T}Ma_{1} & a_{d}^{T}Ma_{2} & \cdots & a_{d}^{T}Ma_{d}
+\end{pmatrix}.
+\]
+So $M$ is psd if and only if for any $A\in\reals^{n\times d}$, we
+have $\diag(A^{T}MA)=\left(a_{1}^{T}Ma_{1},\ldots,a_{d}^{T}Ma_{d}\right)^{T}\succeq0$,
+where $\succeq$ is elementwise inequality, and $0$ is a $d\times1$
+column vector of $0$'s . 
+\end{defn*}
+\begin{enumerate}
+\item Give an example of an orthogonal matrix that is not symmetric. (Hint:
+You can use a $2\times2$ matrix with only the entries -1, 0, and
+1.\\
+\item Use the definition of a psd matrix and the spectral theorem to show
+that all eigenvalues of a positive semidefinite matrix $M$ are non-negative.
+{[}Hint: By Spectral theorem, $\Sigma=Q^{T}MQ$ for some $Q$. What
+if you take $A=Q$ in the ``exercise in matrix multiplication''
+described above?{]} \textbf{}\\
+\item In this problem we show that a psd matrix is a matrix version of a
+non-negative scalar, in that they both have a ``square root''. Show
+that a symmetric matrix $M$ can be expressed as $M=BB^{T}$ for some
+matrix $B$, if and only if $M$ is psd. {[}Hint: To show $M=BB^{T}$
+implies $M$ is psd, use the fact that for any vector $v$, $v^{T}v\ge0$.
+To show that $M$ psd implies $M=BB^{T}$ for some $B$, use the Spectral
+Theorem.{]} \\
+\end{enumerate}
+
+\section{Positive Definite Matices}
+\begin{defn*}
+A real, symmetric matrix $M\in\reals^{n\times n}$ is \textbf{positive
+definite} (spd) if for any $x\in\reals^{n}$ with $x\neq0$, 
+\[
+x^{T}Mx>0.
+\]
+\end{defn*}
+\begin{enumerate}
+\item Show that all eigenvalues of a symmetric positive definite matrix
+are positive. {[}Hint: You can use the same method as you used for
+psd matrices above.{]} 
+\item Let $M$ be a symmetric positve definite matrix. By the spectral theorem,
+$M=Q\Sigma Q^{T}$, where $\Sigma$ is a diagonal matrix of the eigenvalues
+of $M$. By the previous problem, all diagonal entries of $\Sigma$
+are positive. If $\Sigma=\diag\left(\sigma_{1},\ldots,\sigma_{n}\right)$,
+then $\Sigma^{-1}=\diag\left(\sigma_{1}^{-1},\ldots,\sigma_{n}^{-1}\right)$.
+Show that the matrix $Q\Sigma^{-1}Q^{T}$ is the inverse of $M$. 
+\item Since positive semidefinite matrices may have eigenvalues that are
+zero, we see by the previous problem that not all psd matrices are
+invertible. Show that if $M$ is a psd matrix and $I$ is the identity
+matrix, then $M+\lambda I$ is symmetric positive definite for any
+$\lambda>0$, and give an expression for the inverse of $M+\lambda I$.
+\item Let $M$ and $N$ be symmetric matrices, with $M$ positive semidefinite
+and $N$ positive definite. Use the definitions of psd and spd to
+show that $M+N$ is symmetric positive definite. Thus $M+N$ is invertible.
+(Hint: For any $x\neq0$, show that $x^{T}(M+N)x>0$. Also note that
+$x^{T}(M+N)x=x^{T}Mx+x^{T}Nx$.) 
+\end{enumerate}
+
+\section{{[}Optional{]} Kernel Matrices}
+
+The following problem will gives us some additional insight into
+what information is encoded in the kernel matrix. 
+\begin{enumerate}
+\item {[}Optional{]} Consider a set of vectors $S=\{x_{1},\ldots,x_{m}\}$.
+Let $X$ denote the matrix whose rows are these vectors. Form the
+Gram matrix $K=XX^{T}$. Show that knowing $K$ is equivalent to knowing
+the set of pairwise distances among the vectors in $S$ as well as
+the vector lengths. {[}Hint: The distance between $x$ and $y$ is
+given by $d(x,y)=\|x-y\|$, and the norm of a vector $x$ is defined
+as $\|x\|=$$\sqrt{\left\langle x,x\right\rangle }=\sqrt{x^{T}x}$.{]}
+\\
+\\
+\end{enumerate}
+
+\section{Kernel Ridge Regression}
+
+In lecture, we discussed how to kernelize ridge regression using the
+representer theorem. Here we pursue a bare-hands approach. 
+
+Suppose our input space is $\mbox{\ensuremath{\cx}=}\reals^{d}$ and
+our output space is $\cy=\reals$. Let $\cd=\left\{ \left(x_{1},y_{1}\right),\ldots,\left(x_{n},y_{n}\right)\right\} $
+be a training set from $\cx\times\cy$. We'll use the ``design matrix''
+$X\in\reals^{n\times d}$, which has the input vectors as rows: 
+\[
+X=\begin{pmatrix}-x_{1}-\\
+\vdots\\
+-x_{n}-
+\end{pmatrix}.
+\]
+Recall the ridge regression objective function:
+\[
+J(w)=||Xw-y||^{2}+\lambda||w||^{2},
+\]
+for $\lambda>0$.
+\begin{enumerate}
+\item Show that for $w$ to be a minimizer of $J(w)$, we must have $X^{T}Xw+\lambda Iw=X^{T}y$.
+Show that the minimizer of $J(w)$ is $w=(X^{T}X+\lambda I)^{-1}X^{T}y$.
+Justify that the matrix $X^{T}X+\lambda I$ is invertible, for $\lambda>0$.
+(The last part should follow easily from the earlier exercises on
+psd and spd matrices.) \\
+\item Rewrite $X^{T}Xw+\lambda Iw=X^{T}y$ as $w=\frac{1}{\lambda}(X^{T}y-X^{T}Xw)$.
+Based on this, show that we can write $w=X^{T}\alpha$ for some $\alpha$,
+and give an expression for $\alpha$.\\
+\item Based on the fact that $w=X^{T}\alpha$, explain why we say w is ``in
+the span of the data.''\\
+\item Show that $\alpha=(\lambda I+XX^{T})^{-1}y$. Note that $XX^{T}$
+is the kernel matrix for the standard vector dot product. (Hint: Replace
+$w$ by $X^{T}\alpha$ in the expression for $\alpha$, and then solve
+for $\alpha$.)\\
+\item Give a kernelized expression for the $Xw$, the predicted values on
+the training points. (Hint: Replace $w$ by $X^{T}\alpha$ and $\alpha$
+by its expression in terms of the kernel matrix $XX^{T}$.\\
+\item Give an expression for the prediction $f(x)=x^{T}w^{*}$ for a new
+point $x$, not in the training set. The expression should only involve
+$x$ via inner products with other $x$'s. {[}Hint: It is often convenient
+to define the column vector
+\[
+k_{x}=\begin{pmatrix}x^{T}x_{1}\\
+\vdots\\
+x^{T}x_{n}
+\end{pmatrix}
+\]
+to simplify the expression.{]} \\
+\end{enumerate}
+
+\section{\label{sec:=00005BOptional=00005D-Pegasos-and-SSGD}{[}Optional{]}
+Pegasos and SSGD for $\ell_{2}$-regularized ERM\protect\footnote{This problem is based on Shalev-Shwartz and Ben-David's book \protect\href{http://www.cs.huji.ac.il/~shais/UnderstandingMachineLearning/index.html}{Understanding Machine Learning: From Theory to Algorithms},
+Sections 14.5.3, 15.5, and 16.3).}}
+
+Consider the objective function
+\[
+J(w)=\frac{\lambda}{2}\|w\|_{2}^{2}+\frac{1}{n}\sum_{i=1}^{n}\ell_{i}(w),
+\]
+where $\ell_{i}(w)$ represents the loss on the $i$th training point
+$\left(x_{i},y_{i}\right)$. Suppose $\ell_{i}(w):\reals^{d}\to\reals$
+is a convex function. Let's write
+\[
+J_{i}(w)=\frac{\lambda}{2}\|w\|_{2}^{2}+\ell_{i}(w),
+\]
+for the one-point approximation to $J(w)$ using the $i$th training
+point. $J_{i}(w)$ is probably a very poor approximation of $J(w)$.
+However, if we choose $i$ uniformly at random from $1,\ldots,n$,
+then we do have $\ex J_{i}(w)=J(w)$. We'll now show that subgradients
+of $J_{i}(w)$ are unbiased estimators of some subgradient of $J(w)$,
+which is our justification for using SSGD methods.
+
+In the problems below, you may use the following facts about subdifferentials
+without proof (as in Homework \#3): 1) If $f_{1},\ldots,f_{m}:\reals^{d}\to\reals$
+are convex functions and $f=f_{1}+\cdots+f_{m}$, then $\partial f(x)=\partial f_{1}(x)+\cdots+\partial f_{m}(x)$
+{[}\textbf{additivity}{]}. 2) For $\alpha\ge0$, $\partial\left(\alpha f\right)(x)=\alpha\partial f(x)$
+{[}\textbf{positive homogeneity{]}}.
+\begin{enumerate}
+\item {[}Optional{]} For each $i=1,\ldots,n$, let $g_{i}(w)$ be a subgradient
+of $J_{i}(w)$ at $w\in\reals^{d}$. Let $v_{i}(w)$ be a subgradient
+of $\ell_{i}(w)$ at $w$. Give an expression for $g_{i}(w)$ in terms
+of $w$ and $v_{i}(w)$\\
+\\
+\item {[}Optional{]} Show that $\ex g_{i}(w)\in\partial J(w)$, where the
+expectation is over the randomly selected $i\in1,\ldots,n$. (In words,
+the expectation of our subgradient of a randomly chosen $J_{i}(w)$
+is in the subdifferential of $J$.)\\
+\\
+\item {[}Optional{]} Now suppose we are carrying out SSGD with the Pegasos
+step-size $\eta^{(t)}=1/\left(\lambda t\right)$, $t=1,2,\ldots$.
+In the $t$'th step, suppose we select the $i$th point and thus take
+the step $w^{(t+1)}=w^{(t)}-\eta^{(t)}g_{i}(w^{(t)})$. Let's write
+$v^{(t)}=v_{i}(w^{(t)})$, which is the subgradient of the loss part
+of $J_{i}(w^{(t)})$ that is used in step $t$. Show that
+\[
+w^{(t+1)}=-\frac{1}{\lambda t}\sum_{\tau=1}^{t}v^{(\tau)}
+\]
+{[}Hint: One approach is proof by induction. First show it's true
+for $w^{(2)}$. Then assume it's true for $w^{(t)}$ and prove it's
+true for $w^{(t+1)}$. This will prove that it's true for all $t=2,3,\ldots$
+by induction.\\
+\\
+\item {[}Optional{]} We can use the previous result to get a nice equivent
+formulation of Pegasos. Let $\theta^{(t)}=\sum_{\tau=1}^{t-1}v^{(t)}$.
+Then $w^{(t+1)}=-\frac{1}{\lambda t}\theta^{(t+1)}$ Then Pegasos
+from Homework \#3 is equivalent to Algorithm \ref{alg:Pegasos-Algorithm-Thetas}.
+\begin{algorithm}[h]
+\caption{\label{alg:Pegasos-Algorithm-Thetas}Pegasos Algorithm Reformulation}
+
+\begin{lyxcode}
+input:~Training~set~$\left(x_{1},y_{1}\right),\ldots,(x_{n},y_{n})\in\reals^{d}\times\left\{ -1,1\right\} $~and~$\lambda>0$.~\\
+$\theta^{(1)}=\left(0,\ldots,0\right)\in\reals^{d}$~\\
+$w^{(1)}=\left(0,\ldots,0\right)\in\reals^{d}$~\\
+$t=1$~\#~step~number~\\
+repeat~\\
+~~randomly~choose~$j$~in~$1,\ldots,n$~\\
+~~if~$y_{j}\left\langle w^{(t)},x_{j}\right\rangle <1$~\\
+~~~~$\theta^{(t+1)}=\theta^{(t)}+y_{j}x_{j}$~\\
+~~else~\\
+~~~~$\theta^{(t+1)}=\theta^{(t)}$~\\
+~~endif~\\
+~~$w^{(t+1)}=-\frac{1}{\lambda t}\theta^{(t+1)}$~\#~need~not~be~explicitly~computed~\\
+~~$t=t+1$~\\
+until~bored~\\
+return~$w^{(t)}=-\frac{1}{\lambda(t-1)}\theta^{(t)}$~\\
+\end{lyxcode}
+\end{algorithm}
+ Similar to the $w=sW$ decomposition from homework \#3, this decomposition
+gives the opportunity for significant speedup. Explain how Algorithm
+\ref{alg:Pegasos-Algorithm-Thetas} can be implemented so that, if
+$x_{j}$ has $s$ nonzero entries, then we only need to do $O(s)$
+accesses in every pass through the loop.\\
+\\
+\end{enumerate}
+
+\section{Kernelized Pegasos}
+
+Recall the SVM objective function
+\[
+\min_{w\in\reals^{n}}\frac{\lambda}{2}\|w\|^{2}+\frac{1}{m}\sum_{i=1}^{m}\max\left\{ 0,1-y_{i}w^{T}x_{i}\right\} 
+\]
+and the Pegasos algorithm on the training set $\left(x_{1},y_{1}\right),\ldots,(x_{n},y_{n})\in\reals^{d}\times\left\{ -1,1\right\} $
+(Algorithm \ref{alg:Pegasos-Algorithm}).
+
+\begin{algorithm}[h]
+\caption{\label{alg:Pegasos-Algorithm}Pegasos Algorithm}
+
+\begin{lyxcode}
+input:~Training~set~$\left(x_{1},y_{1}\right),\ldots,(x_{n},y_{n})\in\reals^{d}\times\left\{ -1,1\right\} $~and~$\lambda>0$.~\\
+$w^{(1)}=\left(0,\ldots,0\right)\in\reals^{d}$~\\
+$t=0$~\#~step~number~\\
+repeat~\\
+~~$t=t+1$~\\
+~~$\eta^{(t)}=1/\left(t\lambda\right)$~\#~step~multiplier~\\
+~~randomly~choose~$j$~in~$1,\ldots,n$~\\
+~~if~$y_{j}\left\langle w^{(t)},x_{j}\right\rangle <1$~\\
+~~~~$w^{(t+1)}=(1-\eta^{(t)}\lambda)w^{(t)}+\eta_{t}y_{j}x_{j}$~\\
+~~else~\\
+~~~~$w^{(t+1)}=(1-\eta^{(t)}\lambda)w^{(t)}$~\\
+until~bored~\\
+return~$w^{(t)}$~\\
+\end{lyxcode}
+\end{algorithm}
+
+Note that in every step of Pegasos, we rescale $w^{(t)}$ by $\left(1-\eta^{(t)}\lambda\right)=\left(1-\frac{1}{t}\right)\in\left(0,1\right)$.
+This ``shrinks'' the entries of $w^{(t)}$ towards $0$, and it's
+due to the regularization term $\frac{\lambda}{2}\|w\|_{2}^{2}$ in
+the SVM objective function. Also note that if the example in a particular
+step, say $\left(x_{j},y_{j}\right)$, is not classified with the
+required margin (i.e. if we don't have margin $y_{j}w_{t}^{T}x_{j}\ge1$),
+then we also add a multiple of $x_{j}$ to $w^{(t)}$ to end up with
+$w^{(t+1)}$. This part of the adjustment comes from the empirical
+risk. Since we initialize with $w^{(1)}=0$, we are guaranteed that
+we can always write\footnote{Note: This resembles the conclusion of the representer theorem, but
+it's saying something different. Here, we are saying that the $w^{(t)}$
+after every step of the Pegasos algorithm lives in the span of the
+data. The representer theorem says that a mathematical minimimizer
+of the SVM objective function (i.e. what the Pegasos algorithm would
+converge to after infinitely many steps) lies in the span of the data.
+If, for example, we had chosen an initial $w^{(1)}$ that is NOT in
+the span of the data, then none of the $w^{(t)}$'s from Pegasos would
+be in the span of the data. However, we know Pegasos converges to
+a minimum of the SVM objective. Thus after a very large number of
+steps, $w^{(t)}$ would be very close to being in the span of the
+data. It's the gradient of the regularization term that pulls us back
+towards the span of the data. This is basically because the regularization
+is driving all components towards $0$, while the empirical risk updates
+are only pushing things away from $0$ in directions in the span of
+the data.}
+\[
+w^{(t)}=\sum_{i=1}^{n}\alpha_{i}^{(t)}x_{i}
+\]
+after any number of steps $t$. When we kernelize Pegasos, we'll be
+tracking $\alpha^{(t)}=(\alpha_{1}^{(t)},\ldots,\alpha_{n}^{(t)})^{T}$
+directly, rather than $w$. 
+\begin{enumerate}
+\item Kernelize the expression for the margin. That is, show that $y_{j}\left\langle w^{(t)},x_{j}\right\rangle =y_{j}K_{j\cdot}\alpha^{(t)}$,
+where $k(x_{i},x_{j})=\left\langle x_{i},x_{j}\right\rangle $ and
+$K_{j\cdot}$ denotes the $j$th row of the kernel matrix $K$ corresponding
+to kernel $k$.\\
+\\
+\item Suppose that $w^{(t)}=\sum_{i=1}^{n}\alpha_{i}^{(t)}x_{i}$ and for
+the next step we have selected a point $\left(x_{j},y_{j}\right)$
+that does not have a margin violation. Give an update expression for
+$\alpha^{(t+1)}$ so that $w^{(t+1)}=\sum_{i=1}^{n}\alpha_{i}^{(t+1)}x_{i}$.\\
+\\
+\item Repeat the previous problem, but for the case that $\left(x_{j},y_{j}\right)$
+has a margin violation. Then give the full pseudocode for kernelized
+Pegasos. You may assume that you receive the kernel matrix $K$ as
+input, along with the labels $y_{1},\ldots,y_{n}\in\left\{ -1,1\right\} $\\
+\item {[}Optional{]} Above we've directly kernelized . While the direct
+implementation of the original Pegasos required updating all entries
+of $w$ in every step, a direct kernelization of Algorithm \ref{alg:Pegasos-Algorithm},
+as we have done above, leads to updating all entries of $\alpha$
+in every step. Give a version of the kernelized Pegasos algorithm
+that does not suffer from this inefficiency. You may try splitting
+the scale and direction similar to the approach of the previous problem
+set, or you may use a decomposition based on Algorithm \ref{alg:Pegasos-Algorithm-Thetas}
+from the optional problem \ref{sec:=00005BOptional=00005D-Pegasos-and-SSGD}
+above.\\
+\\
+\end{enumerate}
+
+\section{Kernel Methods: Let's Implement}
+
+In this section you will get the opportunity to code kernel ridge
+regression and, optionally, kernelized SVM. To speed things along,
+we've written a great deal of support code for you, which you can
+find in the Jupyter notebooks in the homework zip file. 
+
+\subsection{One more review of kernelization can't hurt (no problems)}
+
+Consider the following optimization problem on a data set $\left(x_{1},y_{1}\right),\ldots\left(x_{n},y_{n}\right)\in\reals^{d}\times\cy$:
+\[
+\min_{w\in\reals^{d}}R\left(\sqrt{\left\langle w,w\right\rangle }\right)+L\left(\left\langle w,x_{1}\right\rangle ,\ldots,\left\langle w,x_{n}\right\rangle \right),
+\]
+where $w,x_{1},\ldots,x_{n}\in\reals^{d}$, and $\left\langle \cdot,\cdot\right\rangle $
+is the standard inner product on $\reals^{d}$. The function $R:\reals^{\ge0}\to\reals$
+is nondecreasing and gives us our regularization term, while\textbf{
+}$L:\reals^{n}\to\reals$ is arbitrary\footnote{You may be wondering ``Where are the $y_{i}$'s?''. They're built
+into the function $L$. For example, a square loss on a training set
+of size $3$ could be represented as $L(p_{1},p_{2},p_{3})=\frac{1}{3}\left[\left(p_{1}-y_{1}\right)^{2}+\left(p_{2}-y_{2}\right)^{2}+\left(p_{3}-y_{3}\right)^{3}\right]$,
+where each $p_{i}$ stands for the $i$th prediction $\left\langle w,x_{i}\right\rangle $. } and gives us our loss term. We noted in lecture that this general
+form includes soft-margin SVM and ridge regression, though not lasso
+regression. Using the representer theorem, we showed if the optimization
+problem has a solution, there is always a solution of the form $w=\sum_{i=1}^{n}\alpha_{i}x_{i}$,
+for some $\alpha\in\reals^{n}$. Plugging this into the our original
+problem, we get the following ``kernelized'' optimization problem:
+\[
+\min_{\alpha\in\reals^{n}}R\left(\sqrt{\alpha^{T}K\alpha}\right)+L\left(K\alpha\right),
+\]
+where $K\in\reals^{n\times n}$ is the Gram matrix (or ``kernel matrix'')
+defined by $K_{ij}=k(x_{i},x_{j})=\left\langle x_{i},x_{j}\right\rangle $.
+Predictions are given by
+\[
+f(x)=\sum_{i=1}^{n}\alpha_{i}k(x_{i},x),
+\]
+and we can recover the original $w\in\reals^{d}$ by $w=\sum_{i=1}^{n}\alpha_{i}x_{i}$.
+
+The ``\textbf{kernel trick}'' is to swap out occurrences of the
+kernel $k$ (and the corresponding Gram matrix $K$) with another
+kernel. For example, we could replace $k(x_{i},x_{j})=\left\langle x_{i},x_{j}\right\rangle $
+by $k'(x_{i},x_{j})=\left\langle \psi(x_{i}),\psi(x_{j})\right\rangle $
+for an arbitrary feature mapping $\psi:\reals^{d}\to\reals^{D}$.
+In this case, the recovered $w\in\reals^{D}$ would be $w=\sum_{i=1}^{n}\alpha_{i}\psi(x_{i})$
+and predictions would be $\left\langle w,\psi(x_{i})\right\rangle $\@.
+
+More interestingly, we can replace $k$ by another kernel $k''(x_{i},x_{j})$
+for which we do not even know or cannot explicitly write down a corresponding
+feature map $\psi$. Our main example of this is the RBF kernel
+\[
+k(x,x')=\exp\left(-\frac{\|x-x'\|^{2}}{2\sigma^{2}}\right),
+\]
+for which the corresponding feature map $\psi$ is infinite dimensional.
+In this case, we cannot recover $w$ since it would be infinite dimensional.
+Predictions must be done using $\alpha\in\reals^{n}$, with $f(x)=\sum_{i=1}^{n}\alpha_{i}k(x_{i},x)$. 
+
+Your implementation of kernelized methods below should not make any
+reference to $w$ or to a feature map $\psi$. Your ``learning''
+routine should return $\alpha$, rather than $w$, and your prediction
+function should also use $\alpha$ rather than $w$. This will allow
+us to work with kernels that correspond to infinite-dimensional feature
+vectors.
+
+\subsection{Kernels and Kernel Machines}
+
+There are many different families of kernels. So far we've spoken
+about linear kernels, RBF/Gaussian kernels, and polynomial kernels.
+The last two kernel types have parameters. In this section we'll implement
+these kernels in a way that will be convenient for implementing our
+kernelized ML methods later on. For simplicity, and because it is
+by far the most common situation\footnote{We are noting this because one interesting aspect of kernel methods
+is that they can act directly on an arbitrary input space $\cx$ (e.g.
+text files, music files, etc.), so long as you can define a kernel
+function $k:\cx\times\cx\to\reals.$ But we'll not consider that case
+here.}, we will assume that our input space is $\cx=\reals^{d}$. This allows
+us to represent a collection of $n$ inputs in a matrix $X\in\reals^{n\times d}$,
+as usual. 
+\begin{enumerate}
+\item Write functions that compute the RBF kernel $k_{\text{RBF}(\sigma)}(x,x')=\exp\left(-\|x-x'\|^{2}/\left(2\sigma^{2}\right)\right)$
+and the polynomial kernel $k_{\text{poly}(a,d)}(x,x')=\left(a+\left\langle x,x'\right\rangle \right)^{d}$.
+The linear kernel $k_{\text{linear}}(x,x')=\left\langle x,x'\right\rangle $,
+has been done for you in the support code. Your functions should take
+as input two matrices $W\in\reals^{n_{1}\times d}$ and $X\in\reals^{n_{2}\times d}$
+and should return a matrix $M\in\reals^{n_{1}\times n_{2}}$ where
+$M_{ij}=k(W_{i\cdot},X_{j\cdot})$. In words, the $(i,j)$'th entry
+of $M$ should be kernel evaluation between $w_{i}$ (the $i$th row
+of $W$) and $x_{j}$ (the $j$th row of $X$). The matrix $M$ could
+be called the ``cross-kernel'' matrix, by analogy to the \href{https://en.wikipedia.org/wiki/Cross-covariance}{cross-covariance matrix}.
+For the RBF kernel, you may use the scipy function \texttt{cdist(X1,X2,'sqeuclidean')}
+in the package \texttt{scipy.spatial.distance} or (with some more
+work) write it in terms the linear kernel (\href{https://multimedia-pattern-recognition.info/fileadmin/Websites/mmprec/uploads/docs/Bauckhage/np-sp-rec-edm.pdf}{Bauckhage's article}
+on calculating Euclidean distance matrices may be helpful).
+\item Use the linear kernel function defined in the code to compute the
+kernel matrix on the set of points $x_{0}\in\cd_{X}=\left\{ -4,-1,0,2\right\} $.
+Include both the code and the output. 
+\item Suppose we have the data set $\cd=\left\{ (-4,2),(-1,0),(0,3),(2,5)\right\} $.
+Then by the representer theorem, the final prediction function will
+be in the span of the functions $x\mapsto k(x_{0},x)$ for $x_{0}\in\cd_{X}=\left\{ -4,-1,0,2\right\} $.
+This set of functions will look quite different depending on the kernel
+function we use.
+\begin{enumerate}
+\item Plot the set of functions $x\mapsto k_{\text{linear}}(x_{0},x)$ for
+$x_{0}\in\cd_{X}$ and for $x\in[-6,6]$.
+\item Plot the set of functions $x\mapsto k_{\text{poly(1,3)}}(x_{0},x)$
+for $x_{0}\in\cd_{X}$ and for $x\in[-6,6]$.
+\item Plot the set of functions $x\mapsto k_{\text{RBF(1)}}(x_{0},x)$ for
+$x_{0}\in\cd_{X}$ and for $x\in[-6,6]$.
+\end{enumerate}
+\item By the representer theorem, the final prediction function will be
+of the form $f(x)=\sum_{i=1}^{n}\alpha_{i}k(x_{i},x)$, where $x_{1},\ldots,x_{n}\in\cx$
+are the inputs in the training set. This is a special case of what
+is sometimes called a \textbf{\href{https://davidrosenberg.github.io/ml2015/docs/4c.kernels.pdf\#page=16}{kernel machine}},
+which is a function of the form $f(x)=\sum_{i=1}^{r}\alpha_{i}k(\mu_{i},x)$,
+where $\mu_{1},\ldots,\mu_{r}\in\cx$ are called \textbf{prototypes}
+or \textbf{centroids} (Murphy's book Section 14.3.1.). In the special
+case that the kernel is an RBF kernel, we get what's called an \textbf{RBF
+Network} (proposed by \href{http://sci2s.ugr.es/keel/pdf/algorithm/articulo/1988-Broomhead-CS.pdf}{Broomhead and Lowe in 1988}).
+We can see that the prediction functions we get from our kernel methods
+will be kernel machines in which every input point $x_{1},\ldots,x_{n}$
+serves as a prototype point. Complete the \texttt{predict} function
+of the class \texttt{Kernel\_Machine} in the skeleton code. Construct
+a \texttt{Kernel\_Machine} object with the RBF kernel (sigma=1), with
+prototype points at $-1,0,1$ and corresponding weights $1,-1,1$.
+Plot the resulting function.\\
+\\
+Note: For this problem, and for other problems below, it may be helpful
+to use \href{https://en.wikipedia.org/wiki/Partial_application}{partial application}
+on your kernel functions. For example, if your polynomial kernel function
+has signature \texttt{polynomial\_kernel(W, X, offset, degree)}, you
+can write \texttt{k = functools. partial(polynomial\_kernel, offset=2,
+degree=2)}, and then a call to \texttt{k(W,X)} is equivalent to \texttt{polynomial\_kernel(W,
+X, offset=2, degree=2)}, the advantage being that the extra parameter
+settings are built into \texttt{k(W,X)}. This can be convenient so
+that you can have a function that just takes a kernel function \texttt{k(W,X)}
+and doesn't have to worry about the parameter settings for the kernel.
+\end{enumerate}
+
+\subsection{Kernel Ridge Regression}
+
+In the zip file for this assignment, you'll find a training and test
+set, along with some skeleton code. We're considering a one-dimensional
+regression problem, in which $\cx=\cy=\ca=\reals$. We'll fit this
+data using kernelized ridge regression, and we'll compare the results
+using several different kernel functions. Because the input space
+is one-dimensional, we can easily visualize the results.
+\begin{enumerate}
+\item Plot the training data. You should note that while there is a clear
+relationship between $x$ and $y$, the relationship is not linear.
+\item In a previous problem, we showed that in kernelized ridge regression,
+the final prediction function is $f(x)=\sum_{i=1}^{n}\alpha_{i}k(x_{i},x)$,
+where $\alpha=(\lambda I+K)^{-1}y$ and $K\in\reals^{n\times n}$
+is the Gram matrix of the training data: $K_{ij}=k(x_{i},x_{j})$,
+for $x_{1},\ldots,x_{n}$. In terms of kernel machines, $\alpha_{i}$
+is the weight on the kernel function evaluated at the prototype point
+$x_{i}$. Complete the function \texttt{train\_kernel\_ridge\_regression}
+so that it performs kernel ridge regression and returns a \texttt{Kernel\_Machine}
+object that can be used for predicting on new points. 
+\item Use the code provided to plot your fits to the training data for the
+RBF kernel with a fixed regularization parameter of $0.0001$ for
+3 different values of sigma: $0.01$, $0.1$, and $1.0$. With values
+of sigma do you think would be more likely to over fit, and which
+less?
+\item Use the code provided to plot your fits to the training data for the
+RBF kernel with a fixed sigma of $0.02$ and 4 different values of
+the regularization parameter $\lambda$: $0.0001$, $0.01$, $0.1$,
+and $2.0$. What happens to the prediction function as $\lambda\to\infty$?
+\item Find the best hyperparameter settings (including kernel parameters
+and the regularization parameter) for each of the kernel types. Summarize
+your results in a table, which gives training error and test error
+for each setting. Include in your table the best settings for each
+kernel type, as well as nearby settings that show that making small
+change in any one of the hyperparameters in either direction will
+cause the performance to get worse. You should use average square
+loss on the test set to rank the parameter settings. To make things
+easier for you, we have provided an sklearn wrapper for the kernel
+ridge regression function we have created so that you can us sklearn's
+GridSearchCV. Note: Because of the small dataset size, these models
+can be fit extremely fast, so there is no excuse for not doing extensive
+hyperparameter tuning. 
+\item Plot your best fitting prediction functions using the polynomial kernel
+and the RBF kernel. Use the domain $x\in\left(-0.5,1.5\right)$. Comment
+on the results. 
+\item The data for this problem was generated as follows: A function $f:\reals\to\reals$
+was chosen. Then to generate a point $\left(x,y\right)$, we sampled
+$x$ uniformly from $(0,1)$ and we sampled $\eps\sim\cn\left(0,0.1\right)$
+(so $\var(\eps)=0.1$). The final point is $\left(x,f(x)+\eps\right)$.
+What is the Bayes decision function and the Bayes risk for the loss
+function $\ell\left(\hat{y},y\right)=\left(\hat{y}-y\right)^{2}$.
+\item {[}Optional{]} Attempt to improve performance by using different kernel
+functions. \href{http://www.gaussianprocess.org/gpml/chapters/RW4.pdf}{Chapter 4}
+from Rasmussen and Williams' book \emph{Gaussian Processes for Machine
+Learning} describes many kernel functions, though they are called
+\textbf{covariance functions} in that book (but they have exactly
+the same definition). Note that you may also create a kernel function
+by first explicitly creating feature vectors, if you are so inspire. 
+\item {[}Optional{]} Use any machine learning model you like to get the
+best performance you can.
+\end{enumerate}
+
+\subsection{{[}Optional{]} Kernelized Support Vector Machines with Kernelized
+Pegasos}
+\begin{enumerate}
+\item Load the SVM training and test data from the zip file. Plot the training
+data using the code supplied. Is the data linearly separable? Quadratically
+seperable? What if we used some RBF kernel?
+\item Unlike for kernel ridge regression, there is no closed-form solution
+for SVM classification (kernelized or not). Implement kernelized Pegasos.
+Because we are not using a sparse representation for this data, you
+will probably not see much gain by implementing the ``optimized''
+versions described in the problems above.
+\item Find the best hyperparameter settings (including kernel parameters
+and the regularization parameter) for each of the kernel types. Summarize
+your results in a table, which gives training error and test error
+(i.e. average $0/1$ loss) for each setting. Include in your table
+the best settings for each kernel type, as well as nearby settings
+that show that making small change in any one of the hyperparameters
+in either direction will cause the performance to get worse. You should
+use the $0/1$ loss on the test set to rank the parameter settings. 
+\item Plot your best fitting prediction functions using the linear, polynomial,
+and the RBF kernel. The code provided may help.
+\end{enumerate}
+
+\section{Representer Theorem {[}Optional{]}}
+
+Recall the following theorem from lecture:
+\begin{thm*}
+[Representer Theorem] Let 
+\[
+J(w)=R\left(\|w\|\right)+L\left(\left\langle w,\psi(x_{1})\right\rangle ,\ldots,\left\langle w,\psi(x_{n})\right\rangle \right),
+\]
+where $R:\reals^{\ge0}\to\reals$ is nondecreasing (the \textbf{regularization}
+term) and $L:\reals^{n}\to\reals$ is arbitrary (the\textbf{ loss
+}term). If $J(w)$ has a minimizer, then it has a minimizer of the
+form
+\[
+w^{*}=\sum_{i=1}^{n}\alpha_{i}\psi(x_{i}).
+\]
+Furthermore, if $R$ is strictly increasing, then all minimizers have
+this form.
+\end{thm*}
+Note: There is nothing in this theorem that guarantees $J(w)$ has
+a minimizer at all. If there is no minimizer, then this theorem does
+not tell us anything. 
+
+In this problem, we will prove the part of the Representer theorem
+for the case that $R$ is strictly increasing.
+\begin{enumerate}
+\item Let $M$ be a closed subspace of a Hilbert space $\ch$. For any $x\in\ch$,
+let $m_{0}=\proj_{M}x$ be the projection of $x$ onto $M$. By the
+Projection Theorem, we know that $(x-m_{0})\perp M$. Then by the
+Pythagorean Theorem, we know $\|x\|^{2}=\|m_{0}\|^{2}+\|x-m_{0}\|^{2}$.
+From this we concluded in lecture that $\|m_{0}\|\le\|x\|$. Show
+that we have $\|m_{0}\|=\|x\|$ only when $m_{0}=x$. (Hint: Use the
+postive-definiteness of the inner product: $\left\langle x,x\right\rangle \ge0$
+and $\left\langle x,x\right\rangle =0\iff x=0$, and the fact that
+we're using the norm derived from such an inner product.)\\
+\item Give the proof of the Representer Theorem in the case that $R$ is
+strictly increasing. That is, show that if $R$ is strictly increasing,
+then all minimizers have this form claimed. (Hint: Consider separately
+the cases that $\|w\|<\|w^{*}\|$ and the case $\|w\|=\|w^{*}\|$.)\\
+\item Suppose that $R:\reals^{\ge0}\to\reals$ and $L:\reals^{n}\to\reals$
+are both convex functions. Use properties of convex functions to show
+that $w\mapsto L\left(\left\langle w,\psi(x_{1})\right\rangle ,\ldots,\left\langle w,\psi(x_{n})\right\rangle \right)$
+is a convex function of $w$, and then that $J(w)$ is also convex
+function of $w$. For simplicity, you may assume that our feature
+space is $\reals^{d}$, rather than a generic Hilbert space. You may
+also use the fact that the composition of a convex function and an
+affine function is convex. That is:, suppose $f:\reals^{n}\to\reals,\ A\in\reals^{n\times m}$
+and $b\in\reals^{n}.$ Define $g:\reals^{m}\to\reals$ by $g(x)=f\left(Ax+b\right)$.
+Then if $f$ is convex, then so is $g$. From this exercise, we can
+conclude that if $L$ and $R$ are convex, then $J$ does have a minimizer
+of the form $w^{*}=\sum_{i=1}^{n}\alpha_{i}\psi(x_{i})$, and if $R$
+is also strictly increasing, then all minimizers of $J$ have this
+form.\\
+\end{enumerate}
+
+\section{Ivanov and Tikhonov Regularization {[}Optional{]}}
+
+In lecture there was a claim that the Ivanov and Tikhonov forms of
+ridge and lasso regression are equivalent. We will now prove a more
+general result.
+
+\subsection{Tikhonov optimal implies Ivanov optimal}
+
+Let $\phi:\cf\to\reals$ be any performance measure of $f\in\cf$,
+and let $\Omega:\cf\to\reals$ be any complexity measure. For example,
+for ridge regression over the linear hypothesis space $\cf=\left\{ f_{w}(x)=w^{T}x\mid w\in\reals^{d}\right\} $,
+we would have $\phi(f_{w})=\frac{1}{n}\sum_{i=1}^{n}\left(w^{T}x_{i}-y_{i}\right)^{2}$
+and $\Omega(f_{w})=w^{T}w$.
+\begin{enumerate}
+\item Suppose that for some $\lambda>0$ we have the Tikhonov regularization
+solution
+\begin{equation}
+\minimizer f=\argmin_{f\in\cf}\left[\phi(f)+\lambda\Omega(f)\right].\label{eq:tikhonovReg}
+\end{equation}
+Show that $\minimizer f$ is also an Ivanov solution. That is, $\exists r>0$
+such that
+\begin{equation}
+\minimizer f=\argmin_{\substack{f\in\cf}
+}\phi(f)\mbox{ subject to }\Omega(f)\le r.\label{eq:ivanovReg}
+\end{equation}
+(Hint: Start by figuring out what $r$ should be. If you're stuck
+on this, ask for help. Then one approach is proof by contradiction:
+suppose $f^{*}$ is not the optimum in \eqref{eq:ivanovReg} and show
+that contradicts the fact that $f^{*}$ solves \eqref{eq:tikhonovReg}.)
+\\
+\\
+\end{enumerate}
+
+\subsection{Ivanov optimal implies Tikhonov optimal (when we have Strong Duality)}
+
+For the converse, we will restrict our hypothesis space to a parametric
+set. That is, 
+\[
+\cf=\left\{ f_{w}(x):\cx\to\reals\mid w\in\reals^{d}\right\} .
+\]
+So we will now write $\phi$ and $\Omega$ as functions of $w\in\reals^{d}$. 
+
+Let $w^{*}$ be a solution to the following Ivanov optimization problem:
+\begin{eqnarray*}
+\textrm{minimize} &  & \phi(w)\\
+\textrm{subject to} &  & \Omega(w)\le r.
+\end{eqnarray*}
+Assume that strong duality holds for this optimization problem and
+that the dual solution is attained. Then we will show that there exists
+a $\lambda\ge0$ such that $\minimizer w=\argmin_{w\in\reals^{d}}\left[\phi(w)+\lambda\Omega(w)\right].$ 
+\begin{enumerate}
+\item Write the Lagrangian $L(w,\lambda)$ for the Ivanov optimization problem.
+\\
+\\
+\textbf{}
+\item Write the dual optimization problem in terms of the dual objective
+function $g(\lambda)$, and give an expression for $g(\lambda)$.
+{[}Writing $g(\lambda)$ as an optimization problem is expected -
+don't try to solve it.{]} \\
+\item We assumed that the dual solution is attained, so let $\lambda^{*}=\argmax_{\lambda\ge0}g(\lambda)$.
+We also assumed strong duality, which implies $\phi(w^{*})=g(\lambda^{*})$.
+Show that the minimum in the expression for $g(\lambda^{*})$ is attained
+at $w^{*}$. {[}Hint: You can use the same approach we used when we
+derived that strong duality implies complementary slackness\footnote{See \url{https://davidrosenberg.github.io/mlcourse/Archive/2016/Lectures/3b.convex-optimization.pdf\#page=30}
+slide 30.}.{]} \textbf{Conclude the proof} by showing that for the choice of
+$\lambda=\lambda^{*}$, we have $\minimizer w=\argmin_{w\in\reals^{d}}\left[\phi(w)+\lambda\Omega(w)\right].$
+\\
+\item The conclusion of the previous problem allows $\lambda=0$, which
+means we're not actually regularizing at all. To ensure we get a proper
+Ivanov regularization problem, we need an additional assumption. The
+one below is taken from \cite{kloft2009efficient}:
+\[
+\inf_{w\in\reals^{d}}\phi(w)<\inf_{\substack{w\in\reals^{d}\\
+\Omega(w)\le r
+}
+}\phi(w)
+\]
+Note that this is a rather intuitive condition: it is simply saying
+that we can fit the training data better {[}strictly better{]} if
+we don't use any regularization. With this additional condition, show
+that $\minimizer w=\argmin_{w\in\reals^{d}}\left[\phi(w)+\lambda\Omega(w)\right]$
+for some $\lambda>0$.\\
+\end{enumerate}
+
+\subsection{Ivanov implies Tikhonov for Ridge Regression.}
+
+To show that Ivanov implies Tikhonov for the ridge regression problem
+(square loss with $\ell_{2}$ regularization), we need to demonstrate
+strong duality and that the dual optimum is attained. Both of these
+things are implied by Slater's constraint qualifications. 
+\begin{enumerate}
+\item Show that the Ivanov form of ridge regression is a convex optimization
+problem with a strictly feasible point. \\
+\end{enumerate}
+
+\section{Novelty Detection {[}Optional{]}}
+
+(Problem derived from Michael Jordan's Stat 241b Problem Set \#2,
+Spring 2004)
+
+A novelty detection algorithm can be based on an algorithm that finds
+the smallest possible sphere containing the data in feature space. 
+\begin{enumerate}
+\item Let $\phi:\cx\to\ch$ be our feature map, mapping elements of the
+input space into our ``feature space'' $\ch$, which is a Hilbert
+space (and thus has an inner product). Formulate the novelty detection
+algorithm described above as an optimization problem. \\
+\item Give the Lagrangian for this problem, and write an equivalent, unconstrained
+``$\inf\sup$'' version of the optimization problem.\\
+\item Show that we have strong duality and thus we will have an equivalent
+optimization problem if we swap the inf and the sup. {[}Hint: Use
+Slater's qualification conditions.{]} \\
+\item Solve the inner minimization problem and give the dual optimization
+problem. {[}Note: You may find it convenient to define the kernel
+function $k(x_{i},x_{j})=\left\langle \phi(x_{i}),\phi(x_{j})\right\rangle $
+and to write your final problem in terms of the corresponding kernel
+matrix $K$ to simplify notation.{]}\\
+\item Write an expression for the optimal sphere in terms of the solution
+to the dual problem. \\
+\item Write down the complementary slackness conditions for this problem,
+and characterize the points that are the ``support vectors''.\\
+\\
+\item Briefly explain how you would apply this algorithm in practice to
+detect ``novel'' instances.
+\item {[}More Optional{]} Redo this problem allowing some of the data to
+lie outside of the sphere, where the number of points outside the
+sphere can be increased or decreased by adjusting a parameter. (Hint:
+Use slack variables). \\
+\end{enumerate}
+
+\end{document}
