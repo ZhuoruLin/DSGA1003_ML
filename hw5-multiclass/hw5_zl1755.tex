@@ -174,6 +174,7 @@ are convex, then their pointwise maximum
 f(x)=\max\left\{ f_{1}(x),\ldots,f_{m}(x)\right\} 
 \]
  is also convex. 
+\pagebreak
 
 \section{Convex Surrogate Loss Functions}
 
@@ -204,6 +205,12 @@ $\Delta$, when we have a linear hypothesis space. We'll start with
 a special case, that the hinge loss is a convex surrogate for the
 $0/1$ loss.
 \pagebreak
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.1 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Hinge loss is a convex surrogate for 0/1 loss}
 \begin{enumerate}
 \item Let $f:\cx\to\reals$ be a classification score function for binary
@@ -225,6 +232,9 @@ If $y \neq sign(x)$, then $yf(x)><0$ and $1=1(y \neq sign(f(x))) \leq 1-yf(x)=ma
 \item Show that the hinge loss $\max\left\{ 0,1-m\right\} $ is a convex
 function of the margin $m$.
 \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: Since both 0 and 1-m are convex function of m. $max(0,1-m)$
 
 \item Suppose our prediction score functions are given by $f_{w}(x)=w^{T}x$.
@@ -234,20 +244,20 @@ of $w$.
 
 Define $g(w)=1-yw^Tx$ and $g'(w')=1-y-w'^Tx$. Then we have:
 
-\begin{equation}
-\begin{split}
+\begin{align*}
 g(\theta w+(1-\theta)w')&=1-y(\theta w+(1-\theta)yw't)^Tx\\
 &=1-\theta yw^Tx -(1-\theta)yw'^Tx\\
 &\leq (1-\theta yw^Tx)+(1 -(1-\theta)yw'^Tx)\\
 &=g(\theta w)+g((1-\theta)w').
-\end{split}
-\end{equation}
+\end{align*}
 Hence $g(w)$ is a convex function, so is $max\{0,g(w)\}$.
 
 \end{enumerate}
 \end{enumerate}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \subsection{Generalized Hinge Loss}
 
@@ -274,6 +284,9 @@ Since binary classification with $0/1$ loss is both intractable and
 a special case of this formulation, we know that this more general
 formulation must also be computationally intractable. Thus we are
 looking for a convex surrogate loss function.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{enumerate}
 \item Suppose we have chosen an $h\in\ch$, from which we get the decision
 function $f(x)=\argmax_{y\in\cy}h(x,y)$. Justify that for any $x\in\cx$
@@ -283,10 +296,16 @@ h(x,y)\le h(x,f(x)).
 \]
 \\
 \noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: f(x) is define to be the $y \in \cy$ such that h(x,y) is at maximun. We automatically have $h(x,y)\le h(x,f(x))$ for all x.
 
 \pagebreak
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Justify the following two inequalities:
 \begin{eqnarray*}
 \Delta\left(y,f(x)\right) & \le & \Delta\left(y,f(x)\right)+h(x,f(x))-h(x,y)\\
@@ -305,10 +324,15 @@ where, as usual, $f(x)=\argmax_{y\in\cy}h(x,y)$. {[}You should think
 about why we cannot write the generalized hinge loss as $\ell\left(f,(x,y)\right)$.{]}
 \\
 \noindent\rule{16cm}{2pt}
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.2 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: Since $f(x)=argmax_{y\in\cy}h(x,y)$ , we must have $h(x,f(x))\le h(x,y)$. Therefore: $\Delta\left(y,f(x)\right) \le\Delta\left(y,f(x)\right)+h(x,f(x))-h(x,y).$  Since $f(x) \in \ca$, we automatically have the second inequality.
 \pagebreak
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item We now introduce a specific base hypothesis space $\ch$ of linear
 functions. Consider a class-sensitive feature mapping $\Psi:\cx\times\cy\to\reals^{d}$,
 and $\ch=\left\{ h_{w}\left(x,y\right)=\left\langle w,\Psi(x,y)\right\rangle \mid w\in\reals^{d}\right\} $.
@@ -319,14 +343,19 @@ on example $\left(x_{i},y_{i}\right)$ as
 \]
 \\
 \noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.3 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: By definition of generalized hinge loss from part 2, we have:
-\begin{eqnarray*}
+\begin{align*}
 \ell \left(h_w,(x_i,y_i)\right)&=\max_{y\in\cy}\left[\Delta(y_i,y)+h(x_i,y)-h(x_i,y_i) \right]\\
 &=\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right].
-\end{eqnarray*}
+\end{align*}
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.1.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \item We will now show that the generalized hinge loss $\ell\left(h_{w},(x_{i},y_{i})\right)$
 is a convex function of $w$. Justify each of the following steps.
@@ -337,18 +366,30 @@ is an affine function of $w$.
 is a convex function of $w$. 
 \end{enumerate}
 \noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.2.4 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: \\
 (a) $\Delta(y_{i},y)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle=\Delta(y_{i},y)+w^T(\Psi(x_i,y)-\Psi(x_i,y_i))$ is an affine function of $w$.\\
 (b) By part (a) $\Delta(y_{i},y)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle$ is an affine function of $w$, therefore is also a convex function of $w$. $\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$ is the pointwise maximun of a group of convex function, hence is also a convex function of $w$.
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \item Conclude that $\ell\left(h_{w},(x_{i},y_{i})\right)$ is a convex
 surrogate for $\Delta(y_{i},f_{w}(x_{i}))$.
 \end{enumerate}
 \noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.5 answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: By part 2, we know that $\ell\left(h_{w},(x_{i},y_{i})\right)$  is a surrogate for  $\Delta(y_{i},f_{w}(x_{i}))$. By part 4 we know $\ell\left(h_{w},(x_{i},y_{i})\right)$  is convex. There fore $\ell\left(h_{w},(x_{i},y_{i})\right)$  is a convex surrogate of $\Delta(y_{i},f_{w}(x_{i}))$.
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3 SGD for Multiclass SVM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{SGD for Multiclass SVM}
@@ -363,6 +404,9 @@ f_{w}(x)=\argmax_{y\in\cy}\left\langle w,\Psi(x,y)\right\rangle
 \]
  
 \begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item For a training set $(x_{1},y_{1}),\ldots(x_{n},y_{n})$, let $J(w)$
 be the $\ell_{2}$-regularized empirical risk function for the multiclass
 hinge loss. We can write this as
@@ -380,11 +424,17 @@ is a convex function of $w$.
 \item $J(w)$ is a convex function of $w$.
 \end{enumerate}
 \noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer:\\
 (a) Since $w\mapsto\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$ is a convex function. The summation of convex functions is convex. Thus $\frac{1}{n}\sum_{i=1}^{n}\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$ is a convex function of $w$.\\
 (b) Since $\|w\|$ is a convex function of $w$. Then $\|w\|^{2}$ is a composition of convex function, which is convex.\\
 (c) By part (a) and (b) we have $J(w)$ is a summation of convex function, which is convex. 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \item Since $J(w)$ is convex, it has a subgradient at every point. Give
 an expression for a subgradient of $J(w)$. You may use any standard
@@ -392,6 +442,9 @@ results about subgradients, including the result from an earlier homework
 about subgradients of the pointwise maxima of functions. (Hint: It
 may be helpful to refer to $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$.)
 \noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.2 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: \\
 Let $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$.\\
 Claim: $g(w) = 2 \lambda w^T+\sum \limits_{i=1}^n\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$ is a subgradient of $J(w)$.\\
@@ -405,20 +458,41 @@ J(w+v) &= \lambda \|w+v\|^2+\frac{1}{n}\sum \limits_{i=1}^n \max_{y\in\cy}\left[
 &\geq J(w)+gv
 \end{align*}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \item Give an expression the stochastic subgradient based on the point $(x_{i},y_{i})$.\\
 \noindent\rule{16cm}{2pt}
 \\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.3 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: $2 \lambda w^T+\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \item Give an expression for a minibatch subgradient, based on the points
 $(x_{i},y_{i}),\ldots,\left(x_{i+m-1},y_{i+m-1}\right)$. 
 \end{enumerate}
 \noindent\rule{16cm}{2pt}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%3.4 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: $2 \lambda w^T+\sum \limits_{i=1}^{m-1}\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$
 
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4 Optional
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{{[}OPTIONAL{]} Another Formulation of Generalized Hinge Loss}
 
