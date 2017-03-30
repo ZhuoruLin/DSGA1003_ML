@@ -236,9 +236,9 @@ Define $g(w)=1-yw^Tx$ and $g'(w')=1-y-w'^Tx$. Then we have:
 
 \begin{equation}
 \begin{split}
-g(\theta w+(1-\theta)w')&=1-y(\theta w+(1-\theta)w't)^Tx\\
-&=1-\theta yw^Tx -(1-\theta)w'^Tx\\
-&\leq (1-\theta yw^Tx)+(1 -(1-\theta)w'^Tx)\\
+g(\theta w+(1-\theta)w')&=1-y(\theta w+(1-\theta)yw't)^Tx\\
+&=1-\theta yw^Tx -(1-\theta)yw'^Tx\\
+&\leq (1-\theta yw^Tx)+(1 -(1-\theta)yw'^Tx)\\
 &=g(\theta w)+g((1-\theta)w').
 \end{split}
 \end{equation}
@@ -282,6 +282,7 @@ and $y\in\cy$, we have
 h(x,y)\le h(x,f(x)).
 \]
 \\
+\noindent\rule{16cm}{2pt}
 Answer: f(x) is define to be the $y \in \cy$ such that h(x,y) is at maximun. We automatically have $h(x,y)\le h(x,f(x))$ for all x.
 
 \pagebreak
@@ -302,6 +303,12 @@ We have shown that for any $x\in\cx,y\in\cy,h\in\ch$ we have
 \]
 where, as usual, $f(x)=\argmax_{y\in\cy}h(x,y)$. {[}You should think
 about why we cannot write the generalized hinge loss as $\ell\left(f,(x,y)\right)$.{]}
+\\
+\noindent\rule{16cm}{2pt}
+
+Answer: Since $f(x)=argmax_{y\in\cy}h(x,y)$ , we must have $h(x,f(x))\le h(x,y)$. Therefore: $\Delta\left(y,f(x)\right) \le\Delta\left(y,f(x)\right)+h(x,f(x))-h(x,y).$  Since $f(x) \in \ca$, we automatically have the second inequality.
+\pagebreak
+
 \item We now introduce a specific base hypothesis space $\ch$ of linear
 functions. Consider a class-sensitive feature mapping $\Psi:\cx\times\cy\to\reals^{d}$,
 and $\ch=\left\{ h_{w}\left(x,y\right)=\left\langle w,\Psi(x,y)\right\rangle \mid w\in\reals^{d}\right\} $.
@@ -310,6 +317,17 @@ on example $\left(x_{i},y_{i}\right)$ as
 \[
 \ell\left(h_{w},(x_{i},y_{i})\right)=\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right].
 \]
+\\
+\noindent\rule{16cm}{2pt}
+Answer: By definition of generalized hinge loss from part 2, we have:
+\begin{eqnarray*}
+\ell \left(h_w,(x_i,y_i)\right)&=\max_{y\in\cy}\left[\Delta(y_i,y)+h(x_i,y)-h(x_i,y_i) \right]\\
+&=\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right].
+\end{eqnarray*}
+
+
+
+\pagebreak
 \item We will now show that the generalized hinge loss $\ell\left(h_{w},(x_{i},y_{i})\right)$
 is a convex function of $w$. Justify each of the following steps.
 \begin{enumerate}
@@ -318,10 +336,21 @@ is an affine function of $w$.
 \item The expression $\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$
 is a convex function of $w$. 
 \end{enumerate}
+\noindent\rule{16cm}{2pt}
+Answer: \\
+(a) $\Delta(y_{i},y)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle=\Delta(y_{i},y)+w^T(\Psi(x_i,y)-\Psi(x_i,y_i))$ is an affine function of $w$.\\
+(b) By part (a) $\Delta(y_{i},y)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle$ is an affine function of $w$, therefore is also a convex function of $w$. $\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$ is the pointwise maximun of a group of convex function, hence is also a convex function of $w$.
+
+\pagebreak
 \item Conclude that $\ell\left(h_{w},(x_{i},y_{i})\right)$ is a convex
 surrogate for $\Delta(y_{i},f_{w}(x_{i}))$.
 \end{enumerate}
+\noindent\rule{16cm}{2pt}
+Answer: By part 2, we know that $\ell\left(h_{w},(x_{i},y_{i})\right)$  is a surrogate for  $\Delta(y_{i},f_{w}(x_{i}))$. By part 4 we know $\ell\left(h_{w},(x_{i},y_{i})\right)$  is convex. There fore $\ell\left(h_{w},(x_{i},y_{i})\right)$  is a convex surrogate of $\Delta(y_{i},f_{w}(x_{i}))$.
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{SGD for Multiclass SVM}
 
 Suppose our output space and our action space are given as follows:
@@ -350,16 +379,47 @@ is a convex function of $w$.
 \item $\|w\|^{2}$ is a convex function of $w$.
 \item $J(w)$ is a convex function of $w$.
 \end{enumerate}
+\noindent\rule{16cm}{2pt}
+Answer:\\
+(a) Since $w\mapsto\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$ is a convex function. The summation of convex functions is convex. Thus $\frac{1}{n}\sum_{i=1}^{n}\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$ is a convex function of $w$.\\
+(b) Since $\|w\|$ is a convex function of $w$. Then $\|w\|^{2}$ is a composition of convex function, which is convex.\\
+(c) By part (a) and (b) we have $J(w)$ is a summation of convex function, which is convex. 
+
+\pagebreak
 \item Since $J(w)$ is convex, it has a subgradient at every point. Give
 an expression for a subgradient of $J(w)$. You may use any standard
 results about subgradients, including the result from an earlier homework
 about subgradients of the pointwise maxima of functions. (Hint: It
 may be helpful to refer to $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$.)
-\item Give an expression the stochastic subgradient based on the point $(x_{i},y_{i})$.
+\noindent\rule{16cm}{2pt}
+Answer: \\
+Let $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$.\\
+Claim: $g(w) = 2 \lambda w^T+\sum \limits_{i=1}^n\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$ is a subgradient of $J(w)$.\\
+Proof: 
+
+\begin{align*}
+J(w+v) &= \lambda \|w+v\|^2+\frac{1}{n}\sum \limits_{i=1}^n \max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w+v,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]\\
+&= \lambda \|w\|^2+\lambda\|v\|^2+2\lambda w^Tv+\frac{1}{n}\sum \limits_{i=1}^n \left[\Delta\left(y_{i},\hat{y}_{i}\right)+\left\langle w,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle\right] \\
+&+\frac{1}{n}\left[\sum \limits_{i=1}^n \left\langle v,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle \right]\\
+&=J(w)+gv+\|v\|^2\\
+&\geq J(w)+gv
+\end{align*}
+
+
+\pagebreak
+\item Give an expression the stochastic subgradient based on the point $(x_{i},y_{i})$.\\
+\noindent\rule{16cm}{2pt}
+\\
+Answer: $2 \lambda w^T+\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$
+
+\pagebreak
 \item Give an expression for a minibatch subgradient, based on the points
 $(x_{i},y_{i}),\ldots,\left(x_{i+m-1},y_{i+m-1}\right)$. 
 \end{enumerate}
+\noindent\rule{16cm}{2pt}\\
+Answer: $2 \lambda w^T+\sum \limits_{i=1}^{m-1}\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$
 
+\pagebreak
 \section{{[}OPTIONAL{]} Another Formulation of Generalized Hinge Loss}
 
 In lecture we defined the \textbf{margin} of the compatibility score

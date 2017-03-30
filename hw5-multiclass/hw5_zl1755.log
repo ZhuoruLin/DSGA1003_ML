@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  29 MAR 2017 17:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  30 MAR 2017 19:16
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -474,40 +474,85 @@ t/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) = [][] \OML/cmm/m/it
 /10 h\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x; y\OT1/cmr/m/n/10 )$\T1/cmr/m/n/10 .
  []
 
+
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 283--287
+[]
+ []
+
 [4]
-Overfull \hbox (82.272pt too wide) in paragraph at lines 342--347
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 303--308
+[] 
+ []
+
+[5]
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 319--323
+[]
+ []
+
+[6]
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 339--343
+[]
+ []
+
+[7]
+Overfull \hbox (25.23946pt too wide) in paragraph at lines 348--350
+[]
+ []
+
+[8]
+Overfull \hbox (82.272pt too wide) in paragraph at lines 371--376
 \T1/cmr/m/n/10 we've shown it in a pre-vi-ous prob-lem, you may use the fact th
 at $\OML/cmm/m/it/10 w \OMS/cmsy/m/n/10 7! [][] []$
  []
 
-[5]
-Overfull \hbox (15.96106pt too wide) in paragraph at lines 359--361
+
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 382--387
+[]
+ []
+
+[9]
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 389--399
+[]
+ []
+
+[10]
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 410--414
+[] 
+ []
+
+[11]
+Overfull \hbox (15.96106pt too wide) in paragraph at lines 416--418
 []\T1/cmr/m/n/10 Give an ex-pres-sion for a mini-batch sub-gra-di-ent, based on
  the points $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; y[]\OT1/cmr/m/n/10 )\OML/cm
 m/m/it/10 ; [] ; []$\T1/cmr/m/n/10 . 
  []
 
-[6]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 423.
- [7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 423.
+
+Overfull \hbox (25.23946pt too wide) in paragraph at lines 419--421
+[] 
+ []
+
+[12]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 483.
+ [13]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 483.
  (./hw5_zl1755.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 423.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 423.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 423.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 483.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 483.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 483.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12204 strings out of 493014
- 170728 string characters out of 6133351
- 287465 words of memory out of 5000000
+ 12210 strings out of 493014
+ 170768 string characters out of 6133351
+ 284465 words of memory out of 5000000
  15596 multiletter control sequences out of 15000+600000
  22781 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,15n,40p,310b,10150s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,15n,40p,408b,10146s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm
 -super-t1.enc}{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></
@@ -536,10 +581,10 @@ ype1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
 e1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/cm-super/sfrm1728.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/u
 rw/courier/ucrr8a.pfb>
-Output written on hw5_zl1755.pdf (7 pages, 344557 bytes).
+Output written on hw5_zl1755.pdf (13 pages, 350966 bytes).
 PDF statistics:
- 195 PDF objects out of 1000 (max. 8388607)
- 158 compressed objects within 2 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 221 PDF objects out of 1000 (max. 8388607)
+ 178 compressed objects within 2 object streams
+ 46 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
