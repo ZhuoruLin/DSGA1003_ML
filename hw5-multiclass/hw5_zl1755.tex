@@ -569,10 +569,20 @@ for all $y\neq y_{i}$. It seems like in this case, we should have
 $0$ loss. This is almost the case. Show that $\ell\left(h,(x_{i},y_{i})\right)=0$
 if we assume that $\Delta\left(y,y\right)=0$ for all $y\in\cy$. 
 \end{enumerate}
+\noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4.3 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer:  Since $m_{i,y}(h)=h(x_{i},y_{i})-h(x_{i},y)\ge\Delta(y_{i},y)$, then $\ell\left(h,(x_{i},y_{i})\right)=\Delta(y_{i},y)-m_{i,y}(h) \le 0$. Also by conclusion of 2.2.2 we also have $\ell\left(h,(x_{i},y_{i})\right) \geq \Delta(y_{i},f(x))=\Delta(y_{i},y_{i})\geq 0$. Therefore $\ell\left(h,(x_{i},y_{i})\right)=0$.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5 Optional
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \section{{[}OPTIONAL{]} Hinge Loss is a Special Case of Generalized Hinge
 Loss}
-
 Let $\cy=\left\{ -1,1\right\} $. Let $\Delta(y,\hat{y})=\ind{y\neq\hat{y}}.$
 If $g(x)$ is the score function in our binary classification setting,
 then define our compatibility function as 
@@ -585,6 +595,15 @@ to hinge loss:
 \[
 \ell\left(h,\left(x,y\right)\right)=\max_{y'\in\cy}\left[\Delta\left(y,y')\right)+h(x,y')-h(x,y)\right]=\max\left\{ 0,1-yg(x)\right\} 
 \]
-
+\noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%5 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer: generally there exist only two cases of $\Delta\left(y,y')\right)+h(x,y')-h(x,y)$\\
+If $y'=y$ we have $h\left(x,y'\right)-h\left(x,y\right)=0$ and $\Delta\left(y,y'\right)=0$. Therefore: $\Delta\left(y,y')\right)+h(x,y')-h(x,y)=0$.\\
+\\
+If $y'\neq y$, it can be computed that for both cases of $y=1$ and $y=-1$, $\Delta\left(y,y')\right)+h(x,y')-h(x,y)=1-yg(x)$.\\
+\\
+Hence $\ell\left(h,\left(x,y\right)\right)=\max_{y'\in\cy}\left[\Delta\left(y,y')\right)+h(x,y')-h(x,y)\right]=\max\left\{ 0,1-yg(x)\right\} $.
  
 \end{document}
