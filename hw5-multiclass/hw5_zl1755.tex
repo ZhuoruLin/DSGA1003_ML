@@ -511,9 +511,28 @@ to be:
 Here we investigate whether this is just an instance of the generalized
 hinge loss $\ell\left(h,\left(x,y\right)\right)$ defined above.
 \begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4.1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Show that $\ell\left(h,\left(x_{i},y_{i}\right)\right)=\max_{y'\in\cy}\left[\Delta\left(y_{i},y'\right)-m_{i,y'}(h)\right]$.
 (In other words, it looks just like loss above, but without the positive
 part.) 
+\\
+\noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer: \\
+By part 2.2.2, according to the definition of generalized hinge loss:\\
+\begin{align*}
+\ell\left(h,\left(x_{i},y_{i}\right)\right)&=\max_{y'\in\cy}\left[\Delta\left(y_{i},y'\right)+h(x_{i},y')-h(x_i,y_{i})\right]\\
+&=\max_{y'\in\cy}\left[\Delta\left(y_{i},y'\right)-m_{i,y'}(h)\right]
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \item Suppose $\Delta\left(y,y'\right)\ge0$ for all $y,y'\in\cy$. Show
 that for any example $\left(x_{i},y_{i}\right)$ and any score function
 $h$, the multiclass hinge loss we gave in lecture and the generalized
@@ -523,6 +542,20 @@ hinge loss presented above are equivalent, in the sense that
 \]
 (Hint: This is easy by piecing together other results we have already
 attained regarding the relationship between $\ell$ and $\Delta$.)
+\\
+\noindent\rule{16cm}{2pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4.2 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answer: By conclusion of part 2.2.2, we have: $\ell\left(h,(x,y)\right)=\max_{y\in\cy}\left(\Delta(y_{i},y)-m_{i,y}(h)\right)\geq \Delta(y,f(x))\geq 0$. Hence $\max_{y\in\cy}\left(\Delta(y_{i},y)-m_{i,y}(h)\right)$ is non-negative, therefore:\\
+\[
+\max_{y\in\cy}\left(\left[\Delta(y_{i},y)-m_{i,y}(h)\right]_{+}\right)=\max_{y\in\cy}\left(\Delta(y_{i},y)-m_{i,y}(h)\right).
+\]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%4.3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \item In the context of the generalized hinge loss, $\Delta(y,y')$ is like
 the ``target margin'' between the score for true class $y$ and
 the score for class $y'$. Suppose that our prediction function $f$
