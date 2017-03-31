@@ -457,7 +457,7 @@ Proof:
 J(w+v) &= \lambda \|w+v\|^2+\frac{1}{n}\sum \limits_{i=1}^n \max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w+v,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]\\
 &\geq \lambda \|w\|^2+\lambda\|v\|^2+2\lambda w^Tv+\frac{1}{n}\sum \limits_{i=1}^n \left[\Delta\left(y_{i},\hat{y}_{i}\right)+\left\langle w,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle\right] \\
 &+\frac{1}{n}\left[\sum \limits_{i=1}^n \left\langle v,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle \right]\\
-&=J(w)+gv+\|v\|^2\\
+&=J(w)+gv+\lambda \|v\|^2\\
 &\geq J(w)+gv
 \end{align*}
 
