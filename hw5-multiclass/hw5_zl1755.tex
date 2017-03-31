@@ -450,7 +450,7 @@ may be helpful to refer to $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: \\
 Let $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$.\\
-Claim: $g(w) = 2 \lambda w^T+\sum \limits_{i=1}^n\left[ (\Psi(x,\hat{y}_{i})-\Psi(x,y_i))\right]$ is a subgradient of $J(w)$.\\
+Claim: $g(w) = 2 \lambda w^T+\frac{1}{n}\sum \limits_{i=1}^n\left[ (\Psi(x,\hat{y}_{i})-\Psi(x,y_i))\right]$ is a subgradient of $J(w)$.\\
 Proof: 
 
 \begin{align*}
