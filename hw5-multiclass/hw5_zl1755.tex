@@ -450,12 +450,12 @@ may be helpful to refer to $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Answer: \\
 Let $\hat{y}_{i}=\argmax_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$.\\
-Claim: $g(w) = 2 \lambda w^T+\sum \limits_{i=1}^n\left[ (\Psi(x,y)-\Psi(x,y_i))\right]$ is a subgradient of $J(w)$.\\
+Claim: $g(w) = 2 \lambda w^T+\sum \limits_{i=1}^n\left[ (\Psi(x,\hat{y}_{i})-\Psi(x,y_i))\right]$ is a subgradient of $J(w)$.\\
 Proof: 
 
 \begin{align*}
 J(w+v) &= \lambda \|w+v\|^2+\frac{1}{n}\sum \limits_{i=1}^n \max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w+v,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]\\
-&= \lambda \|w\|^2+\lambda\|v\|^2+2\lambda w^Tv+\frac{1}{n}\sum \limits_{i=1}^n \left[\Delta\left(y_{i},\hat{y}_{i}\right)+\left\langle w,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle\right] \\
+&\geq \lambda \|w\|^2+\lambda\|v\|^2+2\lambda w^Tv+\frac{1}{n}\sum \limits_{i=1}^n \left[\Delta\left(y_{i},\hat{y}_{i}\right)+\left\langle w,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle\right] \\
 &+\frac{1}{n}\left[\sum \limits_{i=1}^n \left\langle v,\Psi(x_{i},\hat{y}_{i})-\Psi(x_{i},y_{i})\right\rangle \right]\\
 &=J(w)+gv+\|v\|^2\\
 &\geq J(w)+gv
