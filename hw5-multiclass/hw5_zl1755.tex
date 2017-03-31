@@ -226,15 +226,18 @@ where $\sign\left(x\right)=\begin{cases}
 -1 & x<0
 \end{cases}$.
 \\
-Answers: If $y=sign(x)$ then we automatically have $1(y \neq sign(f(x)))=0\leq max(0,1-yf(x))$. \\
+\noindent\rule{16cm}{2pt}
 \\
-If $y \neq sign(x)$, then $yf(x)><0$ and $1=1(y \neq sign(f(x))) \leq 1-yf(x)=max(0,1-yf(x))$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%2.1.A Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Answers: If $y=sign(x)$. Then $yf(x)>0$. We automatically have $1(y \neq sign(f(x)))=0\leq max(0,1-yf(x))$. \\
+\\
+If $y \neq sign(f(x))$, then $yf(x)<0$ and $1=1(y \neq sign(f(x))) \leq 1-yf(x)=max(0,1-yf(x))$.
 \item Show that the hinge loss $\max\left\{ 0,1-m\right\} $ is a convex
 function of the margin $m$.
 \\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%2.1 Answer
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 Answer: Since both 0 and 1-m are convex function of m. $max(0,1-m)$
 
 \item Suppose our prediction score functions are given by $f_{w}(x)=w^{T}x$.
