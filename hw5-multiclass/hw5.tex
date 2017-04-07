@@ -139,11 +139,10 @@ tabsize=2}
 
 
 \title{Machine Learning and Computational Statistics\\
-\textbf{PRELIMINARY VERSION} Homework 5: Generalized Hinge Loss and
-Multiclass SVM}
+Homework 5: Generalized Hinge Loss and Multiclass SVM}
 
 \maketitle
-\textbf{Due: Thursday, April 6, 2017, at 10pm (Submit via Gradescope)}
+\textbf{Due: Tuesday, April 11, 2017, at 10pm (Submit via Gradescope)}
 
 \textbf{Instructions}: Your answers to the questions below, including
 plots and mathematical work, should be submitted as a single PDF file.
@@ -156,9 +155,6 @@ package tends to work better.
 
 
 \section{Introduction}
-
-\textbf{NOTE: THIS PROBLEM SET IS NOT YET COMPLETE. A SIGNIFICANT
-PROGRAMMING PORTION WILL SOON BE ADDED. STAY TUNED.}
 
 The goal of this problem set is to get more comfortable with the multiclass
 hinge loss and multiclass SVM. In several problems below, you are
@@ -260,12 +256,12 @@ h(x,y)\le h(x,f(x)).
 \item Justify the following two inequalities:
 \begin{eqnarray*}
 \Delta\left(y,f(x)\right) & \le & \Delta\left(y,f(x)\right)+h(x,f(x))-h(x,y)\\
- & \le & \max_{y'\in\cy}\left[\Delta\left(y,y')\right)+h(x,y')-h(x,y)\right]
+ & \le & \max_{y'\in\cy}\left[\Delta\left(y,y'\right)+h(x,y')-h(x,y)\right]
 \end{eqnarray*}
 The RHS of the last expression is called the \textbf{generalized hinge
 loss:}
 \[
-\ell\left(h,\left(x,y\right)\right)=\max_{y'\in\cy}\left[\Delta\left(y,y')\right)+h(x,y')-h(x,y)\right].
+\ell\left(h,\left(x,y\right)\right)=\max_{y'\in\cy}\left[\Delta\left(y,y'\right)+h(x,y')-h(x,y)\right].
 \]
 We have shown that for any $x\in\cx,y\in\cy,h\in\ch$ we have
 \[
@@ -279,7 +275,7 @@ and $\ch=\left\{ h_{w}\left(x,y\right)=\left\langle w,\Psi(x,y)\right\rangle \mi
 Show that we can write the generalized hinge loss for $h_{w}(x,y)$
 on example $\left(x_{i},y_{i}\right)$ as
 \[
-\ell\left(h_{w},(x_{i},y_{i})\right)=\max_{y\in\cy}\left[\Delta\left(y_{i},y)\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right].
+\ell\left(h_{w},(x_{i},y_{i})\right)=\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right].
 \]
 \item We will now show that the generalized hinge loss $\ell\left(h_{w},(x_{i},y_{i})\right)$
 is a convex function of $w$. Justify each of the following steps.
@@ -309,11 +305,11 @@ f_{w}(x)=\argmax_{y\in\cy}\left\langle w,\Psi(x,y)\right\rangle
 be the $\ell_{2}$-regularized empirical risk function for the multiclass
 hinge loss. We can write this as
 \[
-J(w)=\lambda\|w\|^{2}+\frac{1}{n}\sum_{i=1}^{n}\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right].
+J(w)=\lambda\|w\|^{2}+\frac{1}{n}\sum_{i=1}^{n}\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right],
 \]
-We will now show that $J(w)$ is a convex function of $w$. Justify
-each of the following steps. As we've shown it in a previous problem,
-you may use the fact that $w\mapsto\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$
+for some $\lambda>0$. We will now show that $J(w)$ is a convex function
+of $w$. Justify each of the following steps. As we've shown it in
+a previous problem, you may use the fact that $w\mapsto\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$
 is a convex function.
 \begin{enumerate}
 \item $\frac{1}{n}\sum_{i=1}^{n}\max_{y\in\cy}\left[\Delta\left(y_{i},y\right)+\left\langle w,\Psi(x_{i},y)-\Psi(x_{i},y_{i})\right\rangle \right]$
@@ -390,5 +386,87 @@ to hinge loss:
 \ell\left(h,\left(x,y\right)\right)=\max_{y'\in\cy}\left[\Delta\left(y,y')\right)+h(x,y')-h(x,y)\right]=\max\left\{ 0,1-yg(x)\right\} 
 \]
 
- 
+
+\section{Multiclass Classification - Implementation}
+
+In this problem we will work on a simple three-class classification
+example, similar to the one \href{https://davidrosenberg.github.io/mlcourse/Archive/2016/Lectures/9a.multiclass.pdf\#page=10}{given in lecture}.
+The data is generated and plotted for you in the skeleton code. 
+
+\subsection{One-vs-All (also known as One-vs-Rest)}
+
+In this problem we will implement one-vs-all multiclass classification.
+Our approach will assume we have a binary base classifier that returns
+a score, and we will predict the class that has the highest score. 
+\begin{enumerate}
+\item Complete the class OneVsAllClassifier in the skeleton code. Following
+the OneVsAllClassifier code is a cell that extracts the results of
+the fit and plots the decision region. Include these results in your
+submission.
+\item {[}Optional{]} Normalize the vectors corresponding to each of the
+linear SVM classifiers so that they have unit norm. Evaluate the results
+and plot the decision regions for these normalized vectors.
+\item {[}Optional{]} You may notice that every time you run the cell that
+fits the models and plots the decision regions, you get slightly different
+results. This is more pronounced when $C$ is larger, e.g. $C=200$.
+Investigate and propose an explanation for this. You may use any means
+necessary, including google searching and asking other people (just
+like in real life). {[}It's generally good to investigate things that
+look odd \textendash{} you'll almost always learn something, and sometimes
+you'll uncover a more serious underlying problem.{]}
+\end{enumerate}
+
+\subsection{Multiclass SVM}
+
+In this question, we will implement stochastic subgradient descent
+for the linear multiclass SVM described in lecture and in this problem
+set. We will use the class-sensitive feature mapping approach with
+the ``multivector construction'', as described in our \href{https://davidrosenberg.github.io/mlcourse/Lectures/7a.multiclass.pdf\#page=27}{multiclass classification lecture}
+and in SSBD Section 17.2.1. 
+\begin{enumerate}
+\item Complete the skeleton code for multiclass SVM. Following the multiclass
+SVM implementation, we have included another block of test code. Make
+sure to include the results from these tests in your assignment, along
+with your code. 
+\end{enumerate}
+
+\section{{[}Optional{]} Audio Classification}
+
+In this problem, we will work on the urban sound dataset \href{https://serv.cusp.nyu.edu/projects/urbansounddataset/urbansound8k.html}{URBANSOUND8K}
+from the Center for Urban Science and Progress (CUSP) at NYU. We will
+first extract features from raw audio data using the \href{https://github.com/librosa/librosa}{LibROSA}
+package, and then we will train multiclass classifiers to classify
+the sounds into 10 sound classes. URBANSOUND8K dataset contains 8732
+labeled sound excerpts. For this problem, you may use the file UrbanSound8K.csv
+to randomly sample 2000 examples for training and 2000 examples for
+validation.
+\begin{enumerate}
+\item In LibROSA, there are many functions for visualizing audio waves and
+spectra, such as display.waveplot() and display.specshow(). Load a
+random audio file from each class as a floating point time series
+with librosa.load(), and plot their waves and \href{https://librosa.github.io/librosa/generated/librosa.display.specshow.html}{linear-frequency power spectrogram}.
+If you are interested, you can also play the audio in the notebook
+with functions display() and Audio() in IPython.display. 
+\item \href{https://en.wikipedia.org/wiki/Mel-frequency_cepstrum}{Mel-frequency cepstral coefficients (MFCC)}
+are a commonly used feature for sound processing. We will use MFCC
+and its first and second differences (like discrete derivatives) as
+our features for classfication. First, use function feature.mfcc()
+from LibROSA to extract MFCC features from each audio sample. (The
+first MFCC coefficient is typically discarded in sound analysis, but
+you do not need to. You can test whether this helps in the optional
+problem below.) Next, use function feature.delta() to calculate the
+first and second differences of MFCC. Finally, combine these features
+and normalize each feature to zero mean and unit variance.
+\item Train a linear multiclass SVM on your 2000 example training set. Evaluate
+your results on the validation set in terms of 0/1 error and generate
+a confusion table. Compare the results to a one-vs-all classifier
+using a binary linear SVM as the base classifier. For each model,
+may use your code from the previous problem, or you may use another
+implementation (e.g. from sklearn). 
+\item {[}More Optional{]} Compare results to any other multiclass classification
+methods of your choice. 
+\item {[}More Optional{]} Try different feature sets and see how they affect
+performance.
+\end{enumerate}
+
 \end{document}
