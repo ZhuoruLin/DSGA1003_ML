@@ -1,0 +1,74 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{sklearn.base} \PYG{k+kn}{import} \PYG{n}{BaseEstimator}\PYG{p}{,} \PYG{n}{ClassifierMixin}\PYG{p}{,} \PYG{n}{clone}
+
+\PYG{k}{class} \PYG{n+nc}{OneVsAllClassifier}\PYG{p}{(}\PYG{n}{BaseEstimator}\PYG{p}{,} \PYG{n}{ClassifierMixin}\PYG{p}{):}
+    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{    One\PYGZhy{}vs\PYGZhy{}all classifier}
+\PYG{l+s+sd}{    We assume that the classes will be the integers 0,..,(n\PYGZus{}classes\PYGZhy{}1).}
+\PYG{l+s+sd}{    We assume that the estimator provided to the class, after fitting, has a \PYGZdq{}decision\PYGZus{}function\PYGZdq{} that}
+\PYG{l+s+sd}{    returns the score for the positive class.}
+\PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+    \PYG{k}{def} \PYG{n+nf}{\PYGZus{}\PYGZus{}init\PYGZus{}\PYGZus{}}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{estimator}\PYG{p}{,} \PYG{n}{n\PYGZus{}classes}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{        Constructed with the number of classes and an estimator (e.g. an}
+\PYG{l+s+sd}{        SVM estimator from sklearn)}
+\PYG{l+s+sd}{        @param estimator : binary base classifier used}
+\PYG{l+s+sd}{        @param n\PYGZus{}classes : number of classes}
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n\PYGZus{}classes} \PYG{o}{=} \PYG{n}{n\PYGZus{}classes}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{estimators} \PYG{o}{=} \PYG{p}{[}\PYG{n}{clone}\PYG{p}{(}\PYG{n}{estimator}\PYG{p}{)} \PYG{k}{for} \PYG{n}{\PYGZus{}} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{n}{n\PYGZus{}classes}\PYG{p}{)]}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{fitted} \PYG{o}{=} \PYG{n+nb+bp}{False}
+
+    \PYG{k}{def} \PYG{n+nf}{fit}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{X}\PYG{p}{,} \PYG{n}{y}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{        This should fit one classifier for each class.}
+\PYG{l+s+sd}{        self.estimators[i] should be fit on class i vs rest}
+\PYG{l+s+sd}{        @param X: array\PYGZhy{}like, shape = [n\PYGZus{}samples,n\PYGZus{}features], input data}
+\PYG{l+s+sd}{        @param y: array\PYGZhy{}like, shape = [n\PYGZus{}samples,] class labels}
+\PYG{l+s+sd}{        @return returns self}
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{c+c1}{\PYGZsh{}Your code goes here}
+        \PYG{k}{for} \PYG{n}{yi}\PYG{p}{,}\PYG{n}{estimator} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{estimators}\PYG{p}{):}
+            \PYG{c+c1}{\PYGZsh{}Create binary classes for each y}
+            \PYG{n}{this\PYGZus{}y} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{y}\PYG{p}{))}
+            \PYG{n}{pos} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{y}\PYG{o}{==}\PYG{n}{yi}\PYG{p}{)[}\PYG{l+m+mi}{0}\PYG{p}{]}
+            \PYG{n}{this\PYGZus{}y}\PYG{p}{[}\PYG{n}{pos}\PYG{p}{]} \PYG{o}{=} \PYG{l+m+mi}{1}
+            \PYG{c+c1}{\PYGZsh{}Fit binary classification}
+            \PYG{n}{estimator}\PYG{o}{.}\PYG{n}{fit}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{this\PYGZus{}y}\PYG{p}{)}
+        \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{fitted} \PYG{o}{=} \PYG{n+nb+bp}{True}
+        \PYG{k}{return} \PYG{n+nb+bp}{self}
+
+    \PYG{k}{def} \PYG{n+nf}{decision\PYGZus{}function}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{X}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{        Returns the score of each input for each class. Assumes}
+\PYG{l+s+sd}{        that the given estimator also implements the decision\PYGZus{}function method (which sklearn SVMs do),}
+\PYG{l+s+sd}{        and that fit has been called.}
+\PYG{l+s+sd}{        @param X : array\PYGZhy{}like, shape = [n\PYGZus{}samples, n\PYGZus{}features] input data}
+\PYG{l+s+sd}{        @return array\PYGZhy{}like, shape = [n\PYGZus{}samples, n\PYGZus{}classes]}
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{k}{if} \PYG{o+ow}{not} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{fitted}\PYG{p}{:}
+            \PYG{k}{raise} \PYG{n+ne}{RuntimeError}\PYG{p}{(}\PYG{l+s+s2}{\PYGZdq{}You must train classifer before predicting data.\PYGZdq{}}\PYG{p}{)}
+
+        \PYG{k}{if} \PYG{o+ow}{not} \PYG{n+nb}{hasattr}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{estimators}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{],} \PYG{l+s+s2}{\PYGZdq{}decision\PYGZus{}function\PYGZdq{}}\PYG{p}{):}
+            \PYG{k}{raise} \PYG{n+ne}{AttributeError}\PYG{p}{(}
+                \PYG{l+s+s2}{\PYGZdq{}Base estimator doesn\PYGZsq{}t have a decision\PYGZus{}function attribute.\PYGZdq{}}\PYG{p}{)}
+
+        \PYG{c+c1}{\PYGZsh{}Replace the following return statement with your code}
+        \PYG{n}{n\PYGZus{}samples} \PYG{o}{=} \PYG{n+nb}{len}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}
+        \PYG{n}{mat2return} \PYG{o}{=} \PYG{n}{np}\PYG{o}{.}\PYG{n}{zeros}\PYG{p}{(}\PYG{n}{n\PYGZus{}samples}\PYG{o}{*}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n\PYGZus{}classes}\PYG{p}{)}\PYG{o}{.}\PYG{n}{reshape}\PYG{p}{(}\PYG{n}{n\PYGZus{}samples}\PYG{p}{,}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{n\PYGZus{}classes}\PYG{p}{)}
+        \PYG{k}{for} \PYG{n}{idx}\PYG{p}{,}\PYG{n}{model} \PYG{o+ow}{in} \PYG{n+nb}{enumerate}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{estimators}\PYG{p}{):}
+            \PYG{n}{mat2return}\PYG{p}{[:,}\PYG{n}{idx}\PYG{p}{]} \PYG{o}{=} \PYG{n}{model}\PYG{o}{.}\PYG{n}{decision\PYGZus{}function}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}
+        \PYG{k}{return} \PYG{n}{mat2return}
+
+    \PYG{k}{def} \PYG{n+nf}{predict}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n}{X}\PYG{p}{):}
+        \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{l+s+sd}{        Predict the class with the highest score.}
+\PYG{l+s+sd}{        @param X: array\PYGZhy{}like, shape = [n\PYGZus{}samples,n\PYGZus{}features] input data}
+\PYG{l+s+sd}{        @returns array\PYGZhy{}like, shape = [n\PYGZus{}samples,] the predicted classes for each input}
+\PYG{l+s+sd}{        \PYGZdq{}\PYGZdq{}\PYGZdq{}}
+        \PYG{c+c1}{\PYGZsh{}Replace the following return statement with your code}
+        \PYG{k}{def} \PYG{n+nf}{getmaxpos}\PYG{p}{(}\PYG{n}{arr1d}\PYG{p}{):}
+            \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{where}\PYG{p}{(}\PYG{n}{arr1d}\PYG{o}{==}\PYG{n+nb}{max}\PYG{p}{(}\PYG{n}{arr1d}\PYG{p}{))[}\PYG{l+m+mi}{0}\PYG{p}{][}\PYG{l+m+mi}{0}\PYG{p}{]}
+        \PYG{n}{decision\PYGZus{}mat} \PYG{o}{=} \PYG{n+nb+bp}{self}\PYG{o}{.}\PYG{n}{decision\PYGZus{}function}\PYG{p}{(}\PYG{n}{X}\PYG{p}{)}
+        \PYG{k}{return} \PYG{n}{np}\PYG{o}{.}\PYG{n}{apply\PYGZus{}along\PYGZus{}axis}\PYG{p}{(}\PYG{n}{arr}\PYG{o}{=}\PYG{n}{decision\PYGZus{}mat}\PYG{p}{,}\PYG{n}{axis}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{func1d}\PYG{o}{=}\PYG{n}{getmaxpos}\PYG{p}{)}
+\end{Verbatim}

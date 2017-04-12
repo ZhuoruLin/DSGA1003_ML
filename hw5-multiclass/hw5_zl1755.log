@@ -1,7 +1,6 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  31 MAR 2017 17:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.5.22)  11 APR 2017 21:22
 entering extended mode
- restricted \write18 enabled.
- file:line:error style messages enabled.
+ \write18 enabled.
  %&-line parsing enabled.
 **hw5_zl1755.tex
 (./hw5_zl1755.tex
@@ -335,25 +334,145 @@ File: hpdftex.def 2016/05/05 v6.83n Hyperref driver for pdfTeX
 \c@bookmark@seq@number=\count116
 \Hy@SectionHShift=\skip64
 )
+(/usr/local/texlive/2016/texmf-dist/tex/latex/minted/minted.sty
+Package: minted 2015/09/09 v2.1 Yet another Pygments shim for LaTeX
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count117
+\FV@InFile=\read1
+\FV@TabBox=\box36
+\c@FancyVerbLine=\count118
+\FV@StepNumber=\count119
+\FV@OutFile=\write3
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count120
+\float@exts=\toks23
+\float@box=\box37
+\@float@everytoks=\toks24
+\@floatcapt=\box38
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count121
+\calc@Bcount=\count122
+\calc@Adimen=\dimen130
+\calc@Bdimen=\dimen131
+\calc@Askip=\skip65
+\calc@Bskip=\skip66
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count123
+\calc@Cskip=\skip67
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/ifplatform/ifplatform.sty
+Package: ifplatform 2010/10/22 v0.4 Testing for the operating system
+
+(/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/catchfile.sty
+Package: catchfile 2016/05/16 v1.7 Catch the contents of a file (HO)
+)
+runsystem(uname -s > "hw5_zl1755.w18")...executed.
+
+
+(./hw5_zl1755.w18)
+runsystem(rm -- "hw5_zl1755.w18")...executed.
+
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/08/02 v2.2a e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count124
+)
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xstring/xstring.sty
+(/usr/local/texlive/2016/texmf-dist/tex/generic/xstring/xstring.tex
+\@xs@message=\write4
+\integerpart=\count125
+\decimalpart=\count126
+)
+Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lineno/lineno.sty
+Package: lineno 2005/11/02 line numbers on paragraphs v4.41
+\linenopenalty=\count127
+\output=\toks25
+\linenoprevgraf=\count128
+\linenumbersep=\dimen132
+\linenumberwidth=\dimen133
+\c@linenumber=\count129
+\c@pagewiselinenumber=\count130
+\c@LN@truepage=\count131
+\c@internallinenumber=\count132
+\c@internallinenumbers=\count133
+\quotelinenumbersep=\dimen134
+\bframerule=\dimen135
+\bframesep=\dimen136
+\bframebox=\box39
+LaTeX Info: Redefining \\ on input line 3056.
+)
+\minted@appexistsfile=\read2
+\FV@BreakIndent=\dimen137
+\FV@BreakSymbolSepLeft=\dimen138
+\FV@BreakSymbolSepRight=\dimen139
+\FV@BreakSymbolIndentLeft=\dimen140
+LaTeX Font Info:    Try loading font information for T1+pcr on input line 688.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1pcr.fd
+File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
+)
+\FV@BreakSymbolIndentRight=\dimen141
+\c@FancyVerbLineBreakLast=\count134
+\FV@LineBox=\box40
+\FV@LineIndentBox=\box41
+\minted@bgbox=\box42
+\minted@code=\write5
+\c@minted@FancyVerbLineTemp=\count135
+\@float@every@listing=\toks26
+\c@listing=\count136
+)
+runsystem(mkdir -p "_minted-hw5_zl1755")...executed.
+
+
+(./_minted-hw5_zl1755/default.pygstyle)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2016/05/09 v1.0r Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/01/02 v1.10 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 96.
+)
+\Gin@req@height=\dimen142
+\Gin@req@width=\dimen143
+)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.sty
-\lst@mode=\count117
-\lst@gtempboxa=\box36
-\lst@token=\toks23
-\lst@length=\count118
-\lst@currlwidth=\dimen130
-\lst@column=\count119
-\lst@pos=\count120
-\lst@lostspace=\dimen131
-\lst@width=\dimen132
-\lst@newlines=\count121
-\lst@lineno=\count122
-\lst@maxwidth=\dimen133
+\lst@mode=\count137
+\lst@gtempboxa=\box43
+\lst@token=\toks27
+\lst@length=\count138
+\lst@currlwidth=\dimen144
+\lst@column=\count139
+\lst@pos=\count140
+\lst@lostspace=\dimen145
+\lst@width=\dimen146
+\lst@newlines=\count141
+\lst@lineno=\count142
+\lst@maxwidth=\dimen147
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
-\c@lstnumber=\count123
-\lst@skipnumbers=\count124
-\lst@framebox=\box37
+\c@lstnumber=\count143
+\lst@skipnumbers=\count144
+\lst@framebox=\box44
 )
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/listings.cfg
 File: listings.cfg 2015/06/04 1.6 listings configuration
@@ -363,25 +482,30 @@ Package: listings 2015/06/04 1.6 (Carsten Heinz)
 (/usr/local/texlive/2016/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2015/06/04 1.6 listings language file
 )
+runsystem(which "pygmentize" && touch "hw5_zl1755.aex")...executed.
+
+runsystem(rm "hw5_zl1755.aex")...executed.
+
+
 (./hw5_zl1755.aux)
 \openout1 = `hw5_zl1755.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 59.
-LaTeX Font Info:    ... okay on input line 59.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 60.
+LaTeX Font Info:    ... okay on input line 60.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -419,65 +543,77 @@ LaTeX Font Info:    ... okay on input line 59.
 
 (/usr/local/texlive/2016/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count125
-\scratchdimen=\dimen134
-\scratchbox=\box38
-\nofMPsegments=\count126
-\nofMParguments=\count127
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count128
-\MPscratchDim=\dimen135
-\MPnumerator=\count129
-\makeMPintoPDFobject=\count130
-\everyMPtoPDFconversion=\toks25
+\scratchcounter=\count145
+\scratchdimen=\dimen148
+\scratchbox=\box45
+\nofMPsegments=\count146
+\nofMParguments=\count147
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count148
+\MPscratchDim=\dimen149
+\MPnumerator=\count149
+\makeMPintoPDFobject=\count150
+\everyMPtoPDFconversion=\toks29
 )
-\AtBeginShipoutBox=\box39
-Package hyperref Info: Link coloring ON on input line 59.
+\AtBeginShipoutBox=\box46
+Package hyperref Info: Link coloring ON on input line 60.
  (/usr/local/texlive/2016/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 (/usr/local/texlive/2016/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count131
+\c@section@level=\count151
 )
-LaTeX Info: Redefining \ref on input line 59.
-LaTeX Info: Redefining \pageref on input line 59.
-LaTeX Info: Redefining \nameref on input line 59.
-\c@lstlisting=\count132
-LaTeX Font Info:    Try loading font information for U+msa on input line 148.
+LaTeX Info: Redefining \ref on input line 60.
+LaTeX Info: Redefining \pageref on input line 60.
+LaTeX Info: Redefining \nameref on input line 60.
+
+(./_minted-hw5_zl1755/default-pyg-prefix.pygstyle)
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 456.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count152
+LaTeX Font Info:    Try loading font information for U+msa on input line 149.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 148.
+LaTeX Font Info:    Try loading font information for U+msb on input line 149.
 
 (/usr/local/texlive/2016/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Try loading font information for T1+pcr on input line 169.
-
-(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/t1pcr.fd
-File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 ) [1
 
 {/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2]
-Overfull \hbox (72.23949pt too wide) in paragraph at lines 222--237
+Overfull \hbox (72.23949pt too wide) in paragraph at lines 223--238
 [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 222--237
+Underfull \hbox (badness 10000) in paragraph at lines 223--238
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 237--240
+Underfull \hbox (badness 10000) in paragraph at lines 238--241
 
  []
 
 [3]
-Overfull \hbox (30.75677pt too wide) in paragraph at lines 294--297
+Overfull \hbox (30.75677pt too wide) in paragraph at lines 295--298
 []\T1/cmr/m/n/10 Suppose we have cho-sen an $\OML/cmm/m/it/10 h \OMS/cmsy/m/n/1
 0 2 H$\T1/cmr/m/n/10 , from which we get the de-ci-sion func-tion $\OML/cmm/m/i
 t/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) = [][] \OML/cmm/m/it
@@ -485,123 +621,166 @@ t/10 f\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x\OT1/cmr/m/n/10 ) = [][] \OML/cmm/m/it
  []
 
 
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 299--306
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 300--307
 []
  []
 
 [4]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 325--335
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 326--336
 []
  []
 
 [5]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 346--353
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 347--354
 []
  []
 
 [6]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 371--382
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 372--383
 []
  []
 
 [7]
-Overfull \hbox (25.23946pt too wide) in paragraph at lines 385--390
+Overfull \hbox (25.23946pt too wide) in paragraph at lines 386--391
 []
  []
 
 [8]
-Overfull \hbox (82.272pt too wide) in paragraph at lines 418--423
+Overfull \hbox (82.272pt too wide) in paragraph at lines 419--424
 \T1/cmr/m/n/10 we've shown it in a pre-vi-ous prob-lem, you may use the fact th
 at $\OML/cmm/m/it/10 w \OMS/cmsy/m/n/10 7! [][] []$
  []
 
 
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 429--437
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 430--438
 []
  []
 
 [9]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 442--455
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 443--456
 []
  []
 
 [10]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 468--479
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 469--480
 [] 
  []
 
 [11]
-Overfull \hbox (15.96106pt too wide) in paragraph at lines 479--481
+Overfull \hbox (15.96106pt too wide) in paragraph at lines 480--482
 []\T1/cmr/m/n/10 Give an ex-pres-sion for a mini-batch sub-gra-di-ent, based on
  the points $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 x[]; y[]\OT1/cmr/m/n/10 )\OML/cm
 m/m/it/10 ; [] ; []$\T1/cmr/m/n/10 . 
  []
 
 
-Overfull \hbox (25.23946pt too wide) in paragraph at lines 482--487
+Overfull \hbox (25.23946pt too wide) in paragraph at lines 483--488
 [] 
  []
 
 [12]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 520--530
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 521--531
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 520--530
+Underfull \hbox (badness 10000) in paragraph at lines 521--531
 
  []
 
 [13]
-Overfull \hbox (50.23949pt too wide) in paragraph at lines 545--554
+Overfull \hbox (50.23949pt too wide) in paragraph at lines 546--555
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 545--554
+Underfull \hbox (badness 10000) in paragraph at lines 546--555
 
  []
 
 [14]
-Overfull \hbox (25.23946pt too wide) in paragraph at lines 575--580
+Overfull \hbox (25.23946pt too wide) in paragraph at lines 576--581
 []
  []
 
 [15]
-Overfull \hbox (25.23946pt too wide) in paragraph at lines 600--611
+Overfull \hbox (25.23946pt too wide) in paragraph at lines 601--612
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--611
+Underfull \hbox (badness 10000) in paragraph at lines 601--612
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--611
+Underfull \hbox (badness 10000) in paragraph at lines 601--612
 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 612.
 [16]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 612.
+\openout3 = `hw5_zl1755.pyg'.
+
+runsystem(pygmentize -l python -f latex -P commandprefix=PYG -F tokenmerge -o "
+_minted-hw5_zl1755/E9BBB49B3FF623494A5FA92586D40E535CF0A85E27D8FF674F9284809BDB
+428E.pygtex" "hw5_zl1755.pyg" )...executed.
+
+
+(./_minted-hw5_zl1755/E9BBB49B3FF623494A5FA92586D40E535CF0A85E27D8FF674F9284809
+BDB428E.pygtex [17]) <onevsall.png, id=145, 433.62pt x 289.08pt>
+File: onevsall.png Graphic file (type png)
+
+<use onevsall.png>
+Package pdftex.def Info: onevsall.png used on input line 722.
+(pdftex.def)             Requested size: 430.00462pt x 286.6841pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[18] <onevsall_normalized.png, id=151, 433.62pt x 289.08pt>
+File: onevsall_normalized.png Graphic file (type png)
+
+<use onevsall_normalized.png>
+Package pdftex.def Info: onevsall_normalized.png used on input line 741.
+(pdftex.def)             Requested size: 430.00462pt x 286.6841pt.
+ [19pdfTeX warning (ext4): destination with the same identifier (name{figure.1}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.746 
+       <./onevsall.png>] [20pdfTeX warning (ext4): destination with the same id
+entifier (name{figure.2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.781 \begin{enumerate}
+                        <./onevsall_normalized.png>]
+runsystem(rm "_minted-hw5_zl1755/E9BBB49B3FF623494A5FA92586D40E538BBBA8B3C4FE13
+95A648A1241A231496.pygtex")...executed.
+
+runsystem(rm "hw5_zl1755.pyg")...executed.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 810.
+ [21]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 810.
  (./hw5_zl1755.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 612.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 612.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 612.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 810.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 810.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 810.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12212 strings out of 493014
- 170777 string characters out of 6133351
- 283465 words of memory out of 5000000
- 15596 multiletter control sequences out of 15000+600000
+ 14811 strings out of 493014
+ 219955 string characters out of 6133351
+ 366219 words of memory out of 5000000
+ 18095 multiletter control sequences out of 15000+600000
  22781 words of font info for 62 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 32i,11n,40p,408b,10155s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 32i,11n,40p,929b,12748s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/cm-super/cm
 -super-t1.enc}{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/base/8r.enc}<
 /usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></
@@ -630,10 +809,10 @@ ype1/public/cm-super/sfrm1000.pfb></usr/local/texlive/2016/texmf-dist/fonts/typ
 e1/public/cm-super/sfrm1200.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
 /public/cm-super/sfrm1728.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/u
 rw/courier/ucrr8a.pfb>
-Output written on hw5_zl1755.pdf (16 pages, 354037 bytes).
+Output written on hw5_zl1755.pdf (21 pages, 385290 bytes).
 PDF statistics:
- 232 PDF objects out of 1000 (max. 8388607)
- 186 compressed objects within 2 object streams
- 48 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 286 PDF objects out of 1000 (max. 8388607)
+ 230 compressed objects within 3 object streams
+ 68 named destinations out of 1000 (max. 500000)
+ 11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
