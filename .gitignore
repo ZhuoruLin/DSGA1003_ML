@@ -1,0 +1,8 @@
+#Latex generation intermediate file
+.log
+.aux
+.synctex.gz
+#Ipython notebook
+.ipynb_checkpoints/
+#Latex Minted package
+_minted*/
