@@ -1,7 +1,7 @@
 #Latex generation intermediate file
-.log
-.aux
-.synctex.gz
+*.log
+*.aux
+*.synctex.gz
 #Ipython notebook
 .ipynb_checkpoints/
 #Latex Minted package
