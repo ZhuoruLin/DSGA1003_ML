@@ -1,4 +1,4 @@
-%% LyX 2.2.2 created this file.  For more info, see http://www.lyx.org/.
+% LyX 2.2.2 created this file.  For more info, see http://www.lyx.org/.
 %% Do not edit unless you really know what you are doing.
 \documentclass[ruled]{article}
 \usepackage{courier}
@@ -167,10 +167,10 @@ tabsize=2}
 
 
 \title{Machine Learning and Computational Statistics\\
-Homework 6: Ensemble Methods}
-
+Homework 6: Ensemble Methods {[}DRAFT - More Problems Coming{]}}
+\author{Zhuoru Lin}
 \maketitle
-\textbf{Due: Monday, May 1st, at 10pm (Submit via Gradescope)}
+\textbf{Due: TBD in week after test, at 10pm (Submit via Gradescope)}
 
 \textbf{Instructions}: Your answers to the questions below, including
 plots and mathematical work, should be submitted as a single PDF file.
@@ -181,7 +181,9 @@ package convenient for including source code in your \LaTeX{} document.
 If you are using \LyX{}, then the \href{https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings}{listings}
 package tends to work better.
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%1 Gradient Boosting Machine
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Gradient Boosting Machines}
 
 Recall the general gradient boosting algorithm\footnote{Besides the lecture slides, you can find an accessible discussion
@@ -216,7 +218,12 @@ f_{m}(x)=f_{m-1}(x)+\nu_{m}h_{m}(x)
 \end{enumerate}
 In this problem we'll derive two special cases of the general gradient
 boosting framework: $L_{2}$-Boosting and BinomialBoost. 
+
+
 \begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%1.1 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Consider the regression framework, where $\cy=\reals$. Suppose our
 loss function is given by 
 \[
@@ -232,6 +239,24 @@ In other words, at each stage we find the weak prediction function
 $h_{m}\in\cf$ that is the best fit to the residuals from the previous
 stage. {[}Hint: Once you understand what's going on, this is a pretty
 easy problem.{]} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}
+\textbf{Answer:}\\
+The negative gradient direction of $\ell$ can be calculated by:
+\[
+-\frac{\partial \ell(\hat{y},y)}{\partial \hat{y}} = -(\hat{y}-y) = y-\hat{y}=y-f(x)
+\]
+$h_m$ is chosen to minimize the square error with $-\frac{\partial \ell(\hat{y},y)}{\partial \hat{y}}$, therefore:
+\[
+h_{m}=\argmin_{h\in\cf}\sum_{i=1}^{n}\left[\left(y_{i}-f_{m-1}(x_{i})\right)-h(x_{i})\right]^{2}.
+\]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \item Now let's consider the classification framework, where $\cy=\left\{ -1,1\right\} $.
 In lecture, we noted that AdaBoost corresponds to forward stagewise
 additive modeling with the exponential loss, and that the exponential
@@ -243,8 +268,23 @@ the logistic loss
 \]
 where $m=yf(x)$ is the margin. Similar to what we did in the $L_{2}$-Boosting
 question, write an expression for $h_{m}$ as an argmin over $\cf$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1.2 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}
+The negative gradient direction is calculated by:
+\[
+-\frac{\partial \ell(y,f(x))}{\partial f(x)}=\frac{ye^{-yf(x)}}{1+e^{-yf(x)}}
+\]
+$h_m$ is chosen by:
+\[
+\argmin_{h \in \cf} \sum_{i=1}^{n}\left[ \frac{ye^{-yf(x)}}{1+e^{-yf(x)}}-h(x_i)  \right]^2
+\]
 \end{enumerate}
 
+\pagebreak
 \section{From Margins to Conditional Probabilities\protect\footnote{This problem is based on Section 7.5.3 of Schapire and Freund's book
 \emph{Boosting: Foundations and Algorithms}.}}
 
@@ -301,9 +341,25 @@ Below we'll calculate $f^{*}$ for several loss functions. It will
 be convenient to let $\pi(x)=\pr\left(y=1\mid x\right)$ in the work
 below.
 \begin{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2.1 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Write $\ex_{y}\left[\ell\left(yf(x)\right)\mid x\right]$ in terms
 of $\pi(x)$ and $\ell\left(f(x)\right)$. {[}Hint: Use the fact that
 $y\in\left\{ -1,1\right\} $.{]}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.5cm}{2pt}\\
+\textbf{Answer:}\\
+\[
+\pi(x)\ell(f(x))+(1-\pi(x)\ell(-f(x))
+\]
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2.2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \item Show that the Bayes prediction function $f^{*}(x)$ for the exponential
 loss function $\ell\left(y,f(x)\right)=e^{-yf(x)}$ is given by 
 \[
@@ -322,6 +378,33 @@ these into the expression you had for the previous problem, you'll
 want to find $\hat{y}$ that minimizes the expression. Use differential
 calculus. Once you've done it for a single $x$, it's easy to write
 the solution as a function of $x$.{]} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2.2 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+Let $R$ be the Bayes risk:
+\begin{align}
+	R = \ex_{y}\left[\ell\left(yf(x)\right)\mid x\right]&=\pi(x)e^{-f(x)}+(1-\pi(x))e^{f(x)} \nonumber\\
+	\frac{\partial R}{f(x)}&=-\pi(x)e^{-f(x)}+(1+\pi(x))e^{f(x)}
+\end{align}
+The Bayes risk minimizer should have $\frac{\partial R}{f(x)}=0$.
+\begin{align}
+	\frac{\partial R}{f(x)}=0 \iff (1+\pi(x))e^{f^{*}(x)} &= \pi(x)e^{-f^{*}(x)} \nonumber\\
+	\frac{e^{f^{*}(x)}}{e^{-f^{*}(x)}} &= \frac{\pi(x)}{1+\pi(x)} \nonumber	\\
+	f^{*}(x) &= \frac{1}{2}(\frac{\pi(x)}{1-\pi(x)}) 
+\end{align}
+
+Rearrange (1) we get:
+\begin{align*}
+\pi(x)=\frac{1}{1+e^{-2f^{*}(x)}}.
+\end{align*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2.3 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagebreak
 \item Show that the Bayes prediction function $f^{*}(x)$ for the logistic
 loss function $\ell\left(y,f(x)\right)=\ln\left(1+e^{-yf(x)}\right)$
 is given by
@@ -333,6 +416,29 @@ and the conditional probabilities are given by
 \pi(x)=\frac{1}{1+e^{-f^{*}(x)}}.
 \]
  Again, we may assume that $\pi(x)\in(0,1)$.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2.3 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+Let $R$ be the Bayes risk:
+\begin{align}
+R = \ex_{y}\left[\ell\left(yf(x)\right)\mid x\right]&=\pi(x)(1+e^{-f(x)})+(1-\pi(x))(1+e^{f(x)}) \nonumber\\
+\frac{\partial R}{f(x)}&=-\pi(x)e^{-f(x)}+(1+\pi(x))e^{f(x)}
+\end{align}
+
+Notice that (3) and (2) are exactly the same thus we have
+\[
+f^{*}(x)=\ln\left(\frac{\pi(x)}{1-\pi(x)}\right)
+\]
+Rearrange we get:
+\begin{align*}
+\pi(x)=\frac{1}{1+e^{-2f^{*}(x)}}.
+\end{align*}
+
+So Logistic lost and exponential lost have the exactly same population minimizer.
+\pagebreak
 \item {[}Optional{]} Show that the Bayes prediction function $f^{*}(x)$
 for the hinge loss function $\ell\left(y,f(x)\right)=\max\left(0,1-yf(x)\right)$
 is given by
@@ -357,12 +463,12 @@ Given training set $D=\{(x_{1},y_{1}),\dots,(x_{n},y_{n})\},$ where
 $y_{i}$'s are either $+1$ or $-1$, suppose we have a weak learner
 $G_{t}$ at time $t$ and we will perform $T$ rounds of AdaBoost.
 Initialize observation weights uniformly by setting $W^{1}=(w_{1}^{1},\dots,w_{n}^{1})$
-with $w_{i}^{1}=1$ for $i=1,2,\dots,n.$ For $t=1,2,\dots,n$: 
+with $w_{i}^{1}=1/n$ for $i=1,2,\dots,n.$ For $t=1,2,\dots,n$: 
 \begin{enumerate}
 \item Fit the weak learner $G_{t}$ at time $t$ to training set $D$ with
 weighting $W^{t}$.
 \item Compute the weighted misclassification error: $\text{err}_{t}=\sum_{D}w_{i}^{t}\ind{G_{t}(x_{i})\neq y_{i}}/\sum_{i}w_{i}^{t}$ 
-\item Compute the contribution coefficient for the weak learner: $\alpha_{t}=\log(\frac{1}{\text{err}_{t}}-1)$ 
+\item Compute the contribution coefficient for the weak learner: $\alpha_{t}=\frac{1}{2}\log(\frac{1}{\text{err}_{t}}-1)$ 
 \item Update the weights: $w_{i}^{t+1}=w_{i}^{t}\exp(-\alpha_{t}y_{i}G_{t}(x_{i}))$ 
 \end{enumerate}
 After $T$ steps, the cumulative contributions of weak learners is
@@ -440,8 +546,7 @@ mean}.)
 \end{eqnarray*}
  (It's the weights that are specific to round $t$.) Show that the
 weighted exponential loss at round $t$ can be written in terms of
-the weighted $0/1$ error. Specifically, show that for any $\beta\in\reals$,
-we have
+the weighted $0/1$ error. Specifically, show that
 \[
 \left(\frac{1}{\sum_{i=1}^{n}w_{i}^{t}}\right)\sum_{i=1}^{n}w_{i}^{t}\exp(-\beta y_{i}h(x_{i}))=e^{-\beta}+\left(e^{\beta}-e^{-\beta}\right)\err_{t}(h).
 \]
@@ -454,7 +559,7 @@ the weighted exponential loss, can be found by minimizing the weighted
 $0/1$ error of $h$. But more precisely, show that if $\beta\ge0$
 then 
 \[
-\text{1argmin}_{h\in\ch}\left(\frac{1}{\sum_{i=1}^{n}w_{i}^{t}}\right)\sum_{i=1}^{n}w_{i}^{t}\exp(-\beta y_{i}h(x_{i}))=\text{argmin}_{h\in\ch}\err_{t}(h).
+\text{argmin}_{h\in\ch}\left(\frac{1}{\sum_{i=1}^{n}w_{i}^{t}}\right)\sum_{i=1}^{n}w_{i}^{t}\exp(-\beta y_{i}h(x_{i}))=\text{argmin}_{h\in\ch}\err_{t}(h).
 \]
 Also show that if $\beta<0$ then
 \[
@@ -484,9 +589,9 @@ e^{-\beta_{t}}w_{i}^{t} & \text{if }y_{i}=h_{t}(x_{i})\\
 e^{-\beta_{t}}w_{i}^{t}e^{2\beta{}_{t}} & \text{otherwise,}
 \end{cases}
 \end{eqnarray*}
-{[}Hint: First show that $w_{i}^{t+1}=w_{i}^{t}\exp(-\beta_{t}y_{i}h_{t}(x_{i}))$.
-Then write $y_{i}h_{t}(x_{i})$ in terms of the indicator function
-$y_{i}\neq h_{t}(x_{i})$.{]} 
+This is the weight update equation from AdaBoost. {[}Hint: First show
+that $w_{i}^{t+1}=w_{i}^{t}\exp(-\beta_{t}y_{i}h_{t}(x_{i}))$. Then
+write $y_{i}h_{t}(x_{i})$ in terms of the indicator function $y_{i}\neq h_{t}(x_{i})$.{]}
 \item Let's introduce a specific instance of AdaBoost we'll call ``Exact
 AdaBoost'', given in Algorithm \ref{alg:Exact-Adaboost-Algorithm}.
 \begin{algorithm}[h]
@@ -527,65 +632,6 @@ only have access to an implementation of Exact AdaBoost described
 in Algorithm \ref{alg:Exact-Adaboost-Algorithm}, and it returns the
 score function $f(x)$. What would be the score function returned
 by FSAM?
-\end{enumerate}
-
-\section{{[}Optional{]} Decision Tree Implementation}
-
-In this problem we'll implement decision trees for both classification
-and regression. The strategy will be to implement a generic class,
-called Decision\_Tree, which we'll supply with the loss function we
-want to use to make node splitting decisions, as well as the estimator
-we'll use to come up with the prediction associated with each leaf
-node. For classification, this prediction could be a vector of probabilities,
-but for simplicity we'll just consider hard classifications here.
-We'll work with the classification and regression data sets from Homework
-\#4. 
-\begin{enumerate}
-\item {[}Optional{]} Complete the class Decision\_Tree, given in the skeleton
-code. The intended implementation is as follows: Each object of type
-Decision\_Tree represents a single node of the tree. The depth of
-that node is represented by the variable self.depth, with the root
-node having depth 0. The main job of the fit function is to decide,
-given the data provided, how to split the node or whether it should
-remain a leaf node. If the node will split, then the splitting feature
-and splitting value are recorded, and the left and right subtrees
-are fit on the relevant portions of the data. Thus tree-building is
-a recursive procedure. We should have as many Decision\_Tree objects
-as there are nodes in the tree. We will not implement pruning\textbf{
-}here. Some additional details are given in the skeleton code. 
-\item {[}Optional{]} Complete either the compute\_entropy or compute\_gini
-functions. Run the code provided that builds trees for the two-dimensional
-classification data. Include the results. For debugging, you may want
-to compare results with sklearn's decision tree. For visualization,
-you'll need to install graphviz.
-\item {[}Optional{]} Complete the function mean\_absolute\_deviation\_around\_median
-(MAE). Use the code provided to fit the Regression\_Tree to the krr
-dataset using both the MAE loss and median predictions. Include the
-plots for the 6 fits.
-\end{enumerate}
-
-\section{Gradient Boosting Implementation}
-
-This method goes by many names, including gradient boosting machines
-(GBM), generalized boosting models (GBM), AnyBoost, and gradient boosted
-regression trees (GBRT), among others. Although one of the nice aspects
-of gradient boosting is that it can be applied to any problem with
-a subdifferentiable loss function, here we'll keep things simple and
-consider the standard regression setting with square loss. 
-\begin{enumerate}
-\item Complete the gradient\_boosting class. As the base regression algorithm,
-you should use the regression tree from the previous problem, if you
-completed it. Otherwise, you may use sklearn's regression tree. You
-should use the square loss for the tree splitting rule and the mean
-function for the leaf prediction rule. Run the code provided to build
-gradient boosting models on the classification and regression data
-sets, and include the plots generated. Note that we are using square
-loss to fit the classification data, as well as the regression data.
-\item {[}Optional{]} Repeat the previous runs on the classification data
-set, but use a different classification loss, such as logistic loss
-or hinge loss. Include the new code and plots of your results. Note
-that you should still use the same regression tree settings for the
-base regression algorithm. 
 \end{enumerate}
 
 \end{document}
