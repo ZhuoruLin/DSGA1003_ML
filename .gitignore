@@ -6,3 +6,5 @@
 .ipynb_checkpoints/
 #Latex Minted package
 _minted*/
+
+*.dot
