@@ -16,7 +16,13 @@
  breaklinks=false,pdfborder={0 0 1},backref=section,colorlinks=true]
  {hyperref}
 
+\usepackage{color}
+\usepackage{minted}
+\newminted[python]{python}{frame=single}
+\fvset{showspaces}
+\renewcommand\FancyVerbSpace{\textcolor{white}{\char32}}
 \makeatletter
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% LyX specific LaTeX commands.
 \providecommand{\LyX}{\texorpdfstring%
@@ -634,4 +640,110 @@ score function $f(x)$. What would be the score function returned
 by FSAM?
 \end{enumerate}
 
+\pagebreak
+
+\section{Gradient Boosting Implementation}
+
+This method goes by many names, including gradient boosting machines
+(GBM), generalized boosting models (GBM), AnyBoost, and gradient boosted
+regression trees (GBRT), among others. Although one of the nice aspects
+of gradient boosting is that it can be applied to any problem with
+a subdifferentiable loss function, here we'll keep things simple and
+consider the standard regression setting with square loss. 
+\begin{enumerate}
+	\item Complete the gradient\_boosting class. As the base regression algorithm,
+	you should use the regression tree from the previous problem, if you
+	completed it. Otherwise, you may use sklearn's regression tree. You
+	should use the square loss for the tree splitting rule and the mean
+	function for the leaf prediction rule. Run the code provided to build
+	gradient boosting models on the classification and regression data
+	sets, and include the plots generated. Note that we are using square
+	loss to fit the classification data, as well as the regression data.
+	
+\begin{minted}{python}
+class gradient_boosting():
+ '''
+ Gradient Boosting regressor class
+ :method fit: fitting model
+ '''
+ def __init__(self, n_estimator, pseudo_residual_func,\
+              learning_rate=0.1, min_sample=5, max_depth=3):
+     '''
+     Initialize gradient boosting class
+     
+     :param n_estimator: number of estimators (i.e. number of rounds of gradient boosting)
+     :pseudo_residual_func: function used for computing pseudo-residual
+     :param learning_rate: step size of gradient descent
+     '''
+     self.n_estimator = n_estimator
+     self.pseudo_residual_func = pseudo_residual_func
+     self.learning_rate = learning_rate
+     self.min_sample = min_sample
+     self.max_depth = max_depth
+     ##########
+     #Note: Should be optimized so that the model does not waste memory
+     #list for saving hm for each step and the 
+     self.base_models = []
+     self.f0 = None
+     ##########
+ def fit(self, train_data, train_target):
+     '''
+     Fit gradient boosting model
+     '''
+     #Fit base model f0 
+     #Note: My f0 may looks like others h1 since I did not initialized f0=0 
+     self.f0 = DecisionTreeRegressor(max_depth=self.max_depth,\
+                                     min_samples_leaf=self.min_sample)
+     self.f0.fit(train_data,train_target)
+     for step in range(self.n_estimator):
+         step_prediction = self.learning_rate*self.f0.predict(train_data)
+         #If there is not model in list direcly calculate residuals with f0
+         if len(self.base_models)==0:
+             residuals = self.pseudo_residual_func(train_target.reshape(-1),\
+                                                   step_prediction)
+         else:
+             for i in range(len(self.base_models)):
+                 #Calculate prediction using weight sum of predictions of hm_s
+                 step_prediction += \
+                 self.learning_rate*self.base_models[i].predict(train_data)
+             #Calculate residuals with fm(x)
+             #Notice: sometimes y_train is of (-1,1) shape we need to reshape to (-1)
+             residuals = self.pseudo_residual_func(train_target.reshape(-1)\
+                                                   ,step_prediction)
+         #Fit hm to residuals, which is some negative gradient direction
+         hm = DecisionTreeRegressor(max_depth=self.max_depth,\
+                                    min_samples_leaf=self.min_sample)
+         hm.fit(train_data,residuals)
+         #Update hm list
+         self.base_models.append(hm)
+     
+ def predict(self, test_data):
+     '''
+     Predict value
+     '''
+     step_prediction = 0.2*self.f0.predict(test_data)
+     for i in range(len(self.base_models)):
+         #Get fm(x) by summation of base predictions
+         step_prediction += self.learning_rate*\
+         self.base_models[i].predict(test_data)
+     return step_prediction
+\end{minted}
+	
+	
+	\pagebreak
+	
+	
+	
+	
+	\item {[}Optional{]} Repeat the previous runs on the classification data
+	set, but use a different classification loss, such as logistic loss
+	or hinge loss. Include the new code and plots of your results. Note
+	that you should still use the same regression tree settings for the
+	base regression algorithm. 
+\end{enumerate}
+
+
+
 \end{document}
+
+
