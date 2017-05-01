@@ -18,6 +18,7 @@
 
 \usepackage{color}
 \usepackage{minted}
+\usepackage{graphicx}
 \newminted[python]{python}{frame=single}
 \fvset{showspaces}
 \renewcommand\FancyVerbSpace{\textcolor{white}{\char32}}
@@ -173,7 +174,7 @@ tabsize=2}
 
 
 \title{Machine Learning and Computational Statistics\\
-Homework 6: Ensemble Methods {[}DRAFT - More Problems Coming{]}}
+Homework 6: Ensemble Methods}
 \author{Zhuoru Lin}
 \maketitle
 \textbf{Due: TBD in week after test, at 10pm (Submit via Gradescope)}
@@ -286,7 +287,7 @@ The negative gradient direction is calculated by:
 \]
 $h_m$ is chosen by:
 \[
-\argmin_{h \in \cf} \sum_{i=1}^{n}\left[ \frac{ye^{-yf(x)}}{1+e^{-yf(x)}}-h(x_i)  \right]^2
+\argmin_{h \in \cf} \sum_{i=1}^{n}\left[ \frac{y_{i}e^{-y_{i}f(x_{i})}}{1+e^{-y_{i}f(x_{i})}}-h(x_i)  \right]^2
 \]
 \end{enumerate}
 
@@ -429,21 +430,22 @@ and the conditional probabilities are given by
 \noindent\rule{14.3cm}{2pt}\\
 \textbf{Answer:}\\
 Let $R$ be the Bayes risk:
+\begin{align*}
+R = \ex_{y}\left[\ell\left(yf(x)\right)\mid x\right]&=\pi(x)\ln(1+e^{-f(x)})+(1-\pi(x))\ln(1+e^{f(x)}) \nonumber\\
+\end{align*}
+
 \begin{align}
-R = \ex_{y}\left[\ell\left(yf(x)\right)\mid x\right]&=\pi(x)(1+e^{-f(x)})+(1-\pi(x))(1+e^{f(x)}) \nonumber\\
-\frac{\partial R}{f(x)}&=-\pi(x)e^{-f(x)}+(1+\pi(x))e^{f(x)}
+\frac{\partial R}{f(x)}=0 \implies (1-\pi(x))\frac{e^{f^{*}(x)}}{1+e^{f^{*}(x)}}&=\pi(x)\frac{e^{-f^{*}(x)}}{1+e^{-f^{*}(x)}}\\
+e^{f*(x)}&=\frac{\pi(x)}{1-\pi(x)}\\
+f^{*}(x) &= \ln \frac{\pi(x)}{1-\pi(x)}
 \end{align}
 
-Notice that (3) and (2) are exactly the same thus we have
-\[
-f^{*}(x)=\ln\left(\frac{\pi(x)}{1-\pi(x)}\right)
-\]
+
 Rearrange we get:
 \begin{align*}
 \pi(x)=\frac{1}{1+e^{-2f^{*}(x)}}.
 \end{align*}
 
-So Logistic lost and exponential lost have the exactly same population minimizer.
 \pagebreak
 \item {[}Optional{]} Show that the Bayes prediction function $f^{*}(x)$
 for the hinge loss function $\ell\left(y,f(x)\right)=\max\left(0,1-yf(x)\right)$
@@ -457,6 +459,8 @@ minimizer, from which we may still be able to recover a reasonable
 estimate for $\pi(x)$. An early approach to this problem is known
 as ``Platt scaling'': \href{https://en.wikipedia.org/wiki/Platt_scaling}{https://en.wikipedia.org/wiki/Platt\_{}scaling}.
 \end{enumerate}
+
+\pagebreak
 
 \section{AdaBoost Actually Works {[}Optional{]}}
 
@@ -491,15 +495,112 @@ the output at time $t$ as $f_{t}=\sum_{s\leq t}\alpha_{s}G_{s}$
 and $Z_{t}=\frac{1}{n}\sum_{i=1}^{n}\exp(-y_{i}f_{t}(x_{i}))$.
 \begin{enumerate}
 \item For any function $g$, show that $\mathbbm{1}_{\{g(x)\neq y\}}<\exp{(-yg(x))}$.\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+For  any function $g(x)$ we have:\\
+When $y=g(x)$, $yg(x)=1$ then:\\
+\[
+1_{(g(x)\neq y)} \leq e^{-1} = e^{-y^2} = e^{-yg(x)}
+\]\\
+When $y\neq g(x)$, $yg(x)=-1$ then:\\
+\[
+1_{(g(x)\neq y)} \leq e = e^{-yg(x)}
+\]\\
+
+\pagebreak
+
+
 \item Use this to show $L(G,D)<Z_{T}$\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3.2Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+If $G(x)=y$, then we must have $yf_T(x)>0$. Therefore:
+\[
+1_{(G(x)\neq y)}=0<\exp (-yf(x))
+\]\\
+Similarly if $G(x)=y$, then we must have $yf_T(x)<0$. Then:
+\[
+1_{(G(x)\neq y)}=1 < \exp (0)<\exp(-yf_T(x))
+\]\\
+The statements above hold for all $G$ and $f_T$. Therefore we must have:
+\[
+\sum \limits_{i=1}^n 1_{(G(x_i)\neq y_i)}< \sum \limits_{i=1}^n \exp(-y_if_T(x_i))\\
+\]
+\pagebreak
 \item Show that $w_{i}^{t+1}=\exp(-y_{i}f_{t}(x_{i}))$\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3.3Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+We show this by strong induction on t.\\
+Base Case: $f_0 = \alpha_0 G_0(x_i)$. Then $w_i^0=\exp(-y_if_0(x_i))$\\
+Induction step: if $w_{i}^{T}=\exp(-y_{i}f_{T-1}(x_{i}))$ is true for $T = 1,2,3,...,t$. Then
+\begin{align*}
+w_i^{t+1} &= w_i^t \exp(-\alpha_t y_i G_t(x_i))\\
+&=w_i ^0\exp(-y_i \sum \limits_{T=0}^t \alpha_T G_t(x_i))\\
+&=w_i ^0\exp(-y_i f_t(x_i))
+\end{align*}
+\pagebreak
 \item Use part 3 to show $\frac{Z_{t+1}}{Z_{t}}=2\sqrt{\text{err}_{t+1}(1-\text{err}_{t+1})}$
 (Hint: use the definition of weight updates and separate the sum on
 where $G_{t}$ is equal to 1 and $-1$.)\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3.4Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+By part 3, we can write $Z_{t} = \sum \limits_{i=0}^n w_{t+1}$ . Also by the update rule of $w_t$, we have $w_{t+1}=w_t \exp(-\alpha_{t}y_iG_{t+1}(x_i))$
+\begin{align*}
+\frac{Z_{t+1}}{Z_{t}} = \frac{\sum \limits_{i=1}^n w_i^{t+2}}{\sum \limits_{i=1}^n w_i^{t+1}} &= \frac{\sum \limits_{i=1}^n w_i^{t+1} \exp(-\alpha_t+1 y_i G_{t+1} (x_i)) }{\sum \limits_{i=1}^n w_i^{t+1}}\\
+&=\frac{\exp(-\alpha_{t+1}) \sum \limits_{i=1}^nw_i^{t+1} + (\exp(\alpha_{t+1})-\exp(-\alpha_{t+1})) \sum \limits_{i=1}^n w_i^{t+1} 1_{G_{t+1}(x_i)\neq y_i}}{\sum \limits_{i=1}^nw_i^{t+1}}
+\end{align*}
+
+Notice that $err_{t+1}= \frac{\sum \limits_{i=1}^n w_i^{t+1} 1_{G_{t+1}\neq y_i} }{ \sum \limits_{i=1}^n w_i^{t+1}}$, and $\alpha_{t+1}=\frac{1}{2} \ln (\frac{1-err_{t+1}}{err_{t+1}}) $ therefore:
+
+\begin{align*}
+\frac{Z_{t+1}}{Z_{t}} &= e^{-\alpha_{t+1}}+(e^{\alpha_{t+1}}-e^{-\alpha_{t+1}})err_{t+1}\\
+&=2\sqrt{(1-err_{t+1})err_{t+1}}
+\end{align*}
+
+\pagebreak
 \item Show that the function $g(a)=a(1-a)$ is monotonically increasing
-on $[0,1/2]$. Show that $1-a\leq\exp(-a)$. And use the assumption
-on the weak learner to show that $\frac{Z_{t+1}}{Z_{t}}\leq\exp(-2\gamma^{2})$\\
+on $[0,1/2]$. Show that $1-a\leq\exp(-a)$. And use the assumption on the weak learner to show that $\frac{Z_{t+1}}{Z_{t}}\leq\exp(-2\gamma^{2})$\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 3.5Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+
+$\frac{d(g(a))}{da} = 1-2a >0$ for $a \in [0,1/2]$. Thus $g(a)$ is monotonically increasing on $[0,1/2]$.\\
+By expanding $\exp(-a)$ using Maclaurin's series we have: $\exp(-a)=1-a+\frac{a^2}{2}...>1-a$.\\\
+By Part 4 and definition of $err_{t+1}$:\\
+\[
+ \frac{Z_{t+1}}{Z_{t}} = 2\sqrt{(1-\frac{1}{2}+\gamma)(\frac{1}{2}-\gamma)}=\sqrt{1-4\gamma^2} = \sqrt{(1-2\gamma)(1+2\gamma)}\\
+\]
+Since $\frac{1}{2}>\gamma>0 $:
+\[
+\frac{Z_{t+1}}{Z_t} < 1-2\gamma <1-2\gamma^2 < exp(-2\gamma^2)
+\]
+
+\pagebreak
+
 \item Conclude the proof!\\
+By part 5, we already show that $\frac{Z_{t+1}}{Z_{t}}\leq\exp(-2\gamma^{2})$ for all $t$. Then:
+\begin{align*}
+L(G,D)<Z_{T} = \prod_{t=1}^T \frac{Z_{T}}{Z_{T-1}} \leq exp(-2\gamma^2T)
+\end{align*}
+\pagebreak
 \end{enumerate}
 
 \section{AdaBoost is FSAM With Exponential Loss {[}Optional{]}}
@@ -545,6 +646,8 @@ constant factor, there is no effect on the $\argmin$. Thus the first
 factor $\left(\sum_{i=1}^{n}w_{i}^{t}\right)^{-1}$ can be dropped.
 However, we keep it so we can refer to the expression as a \textbf{weighted
 mean}.) 
+
+\pagebreak
 \item \global\long\def\err{\text{err}}
  Define the weighted $0/1$ error of $h$ at round $t$ to be
 \begin{eqnarray*}
@@ -559,6 +662,7 @@ the weighted $0/1$ error. Specifically, show that
 {[}Hint: Use indicators $\ind{h(x_{i})\neq y_{i}}$ and $\ind{h(x_{i})=y_{i}}$
 to split the summand on the LHS into pieces. Each piece simplifies,
 since $y_{i},h(x_{i})\in\left\{ -1,1\right\} $. Then note that $\ind{h(x_{i})=y_{i}}=1-\ind{h(x_{i})\neq y_{i}}$.{]}
+\pagebreak
 \item We now would like to show that for any fixed ``step size'' $\beta$,
 the optimal ``step direction'' $h$, for which $\beta h$ minimizes
 the weighted exponential loss, can be found by minimizing the weighted
@@ -572,7 +676,7 @@ Also show that if $\beta<0$ then
 \text{argmin}_{h\in\ch}\left(\frac{1}{\sum_{i=1}^{n}w_{i}^{t}}\right)\sum_{i=1}^{n}w_{i}^{t}\exp(-\beta y_{i}h(x_{i}))=\text{argmin}_{h\in\ch}\err_{t}(-h).
 \]
 \\
- 
+ \pagebreak
 \item Show that if $\ch$ is symmetric, in the sense that $h\in\ch$ implies
 $-h\in\ch$, then there is always an optimal FSAM step $\left(\beta_{t},h_{t}\right)$
 with $\beta_{t}\ge0$. Thus if we assume that either $\ch$ is symmetric
@@ -582,12 +686,14 @@ h_{t}=\text{argmin}_{h\in\ch}\err_{t}(h)
 \]
 is a solution to $h_{t}$ in the minimization problem in the first
 part, and thus is the FSAM step direction in round $t$.
+\pagebreak
 \item Now that we've found $h_{t}$, show that the corresponding optimal
 step size is given by $\beta_{t}=\frac{1}{2}\log\left(\frac{1-\err_{t}}{\err_{t}}\right)$,
 where we let $\err_{t}=\err_{t}(h_{t})$ as a shorthand. {[}Hint:
 You'll need to use some differential calculus. Show that what you've
 found is a minimum by showing that the function you're differentiating
 is convex.{]}\\
+\pagebreak
 \item Show that 
 \begin{eqnarray*}
 w_{i}^{t+1} & = & \begin{cases}
@@ -598,6 +704,7 @@ e^{-\beta_{t}}w_{i}^{t}e^{2\beta{}_{t}} & \text{otherwise,}
 This is the weight update equation from AdaBoost. {[}Hint: First show
 that $w_{i}^{t+1}=w_{i}^{t}\exp(-\beta_{t}y_{i}h_{t}(x_{i}))$. Then
 write $y_{i}h_{t}(x_{i})$ in terms of the indicator function $y_{i}\neq h_{t}(x_{i})$.{]}
+\pagebreak
 \item Let's introduce a specific instance of AdaBoost we'll call ``Exact
 AdaBoost'', given in Algorithm \ref{alg:Exact-Adaboost-Algorithm}.
 \begin{algorithm}[h]
@@ -632,6 +739,8 @@ usually an implementable algorithm. Show that the score functions
 returned by Exact Adaboost and by FSAM (in our setting) differ only
 by a constant factor, and of course the hard classifications will
 be exactly the same. 
+
+\pagebreak
 \item Suppose our ultimate goal is to find the score function returned by
 FSAM after $T$ rounds in the context described above. Suppose we
 only have access to an implementation of Exact AdaBoost described
@@ -642,6 +751,254 @@ by FSAM?
 
 \pagebreak
 
+\section{{[}Optional{]} Decision Tree Implementation}
+
+In this problem we'll implement decision trees for both classification
+and regression. The strategy will be to implement a generic class,
+called Decision\_Tree, which we'll supply with the loss function we
+want to use to make node splitting decisions, as well as the estimator
+we'll use to come up with the prediction associated with each leaf
+node. For classification, this prediction could be a vector of probabilities,
+but for simplicity we'll just consider hard classifications here.
+We'll work with the classification and regression data sets from Homework
+\#4. 
+\begin{enumerate}
+\item {[}Optional{]} Complete the class Decision\_Tree, given in the skeleton
+code. The intended implementation is as follows: Each object of type
+Decision\_Tree represents a single node of the tree. The depth of
+that node is represented by the variable self.depth, with the root
+node having depth 0. The main job of the fit function is to decide,
+given the data provided, how to split the node or whether it should
+remain a leaf node. If the node will split, then the splitting feature
+and splitting value are recorded, and the left and right subtrees
+are fit on the relevant portions of the data. Thus tree-building is
+a recursive procedure. We should have as many Decision\_Tree objects
+as there are nodes in the tree. We will not implement pruning\textbf{
+}here. Some additional details are given in the skeleton code. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5.1Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+\begin{minted}{python}
+class Decision_Tree(BaseEstimator):
+     
+    def __init__(self, split_loss_function, leaf_value_estimator,
+                 depth=0, min_sample=5, max_depth=10):
+        '''
+        Initialize the decision tree classifier
+
+        :param split_loss_function: method for splitting node
+        :param leaf_value_estimator: method for estimating leaf value
+        :param depth: depth indicator, default value is 0, representing root node
+        :param min_sample: an internal node can be splitted only if it contains points more than min_smaple
+        :param max_depth: restriction of tree depth.
+        '''
+        self.split_loss_function = split_loss_function
+        self.leaf_value_estimator = leaf_value_estimator
+        self.depth = depth
+        self.min_sample = min_sample
+        self.max_depth = max_depth
+        ##########Simon's Edit###########
+        self.is_leaf = None
+        self.split_id = None
+        self.split_value = None
+        self.left = None
+        self.right = None
+        self.value = None
+        self.loss = None
+        #################################
+    def fit(self, X, y=None):
+        '''
+        This should fit the tree classifier by setting the values self.is_leaf, 
+        self.split_id (the index of the feature we want ot split on, if we're splitting),
+        self.split_value (the corresponding value of that feature where the split is),
+        and self.value, which is the prediction value if the tree is a leaf node.  If we are 
+        splitting the node, we should also init self.left and self.right to be Decision_Tree
+        objects corresponding to the left and right subtrees. These subtrees should be fit on
+        the data that fall to the left and right,respectively, of self.split_value.
+        This is a recurisive tree building procedure. 
+        
+        :param X: a numpy array of training data, shape = (n, m)
+        :param y: a numpy array of labels, shape = (n, 1)
+
+        :return self
+        '''
+        #If depth is max depth turn into leaf
+        if self.depth == self.max_depth:
+            self.is_leaf = True
+            self.value = self.leaf_value_estimator(y)
+            return self
+        #If reach minimun sample size turn into leaf
+        if len(y)<=self.min_sample:
+            self.is_leaf = True
+            self.value = self.leaf_value_estimator(y)
+            return self
+        #If not is_leaf, i.e in the node, we should create left and right subtree
+        #But First we need to decide the self.split_id and self.split_value that minimize loss
+        #Compare with constant prediction of all X
+        loss_before = self.split_loss_function(y)
+        best_split_value = None
+        best_split_id = None
+        best_loss = self.split_loss_function(y)
+        best_left_X = None
+        best_right_X = None
+        best_left_y = None
+        best_right_y = None
+        best_pos = None
+        #Concatenate y into X for sorting together
+        X = np.concatenate([X,y],1)
+        for i in range(X.shape[1]-1): 
+            #Note: The last column of X is y now
+            X = np.array(sorted(X,key=lambda x:x[i]))
+            for split_pos in range(len(X)-1):
+                #:split_pos+1 will include the split_pos data in left_X
+                left_X = X[:split_pos+1,:-1]
+                right_X = X[split_pos+1:,:-1]
+                #you need left_y to be in (n,1) i.e (-1,1) dimension
+                left_y = X[:split_pos+1,-1].reshape(-1,1)
+                right_y = X[split_pos+1:,-1].reshape(-1,1)
+                left_loss = len(left_y)*self.split_loss_function(left_y)/len(y)
+                right_loss = len(right_y)*self.split_loss_function(right_y)/len(y)
+                #If any choice of splitting feature and splitting position results in better loss
+                #record following information and discard the old one
+                if ((left_loss+right_loss)<best_loss):
+                    best_split_value = X[split_pos,i]
+                    best_pos = split_pos
+                    best_split_id = i
+                    best_loss = left_loss+right_loss
+                    best_left_X = left_X
+                    best_right_X = right_X
+                    best_left_y = left_y
+                    best_right_y = right_y
+        #Condition when you have a split position that results in better loss
+        if best_split_id!=None:
+            self.left = Decision_Tree(self.split_loss_function,self.leaf_value_estimator,self.depth+1\
+                                      ,self.min_sample,self.max_depth)
+            self.right = Decision_Tree(self.split_loss_function,self.leaf_value_estimator,self.depth+1\
+                                       ,self.min_sample,self.max_depth)
+#             #############Debugging Printint##########
+#             print('split feature: x[%s]'%(best_split_id))
+#             #print('split pos: %s'%(best_pos))
+#             print('split value:%s'%(best_split_value))
+#             print('(left size,right size): (%s,%s)'%(len(best_left_X),len(best_right_y)))
+#             print('Loss before splited: %.6f'%(loss_before))
+#             print('Loss after splited: %.6f'%(best_loss))
+#             print()
+#             ##########################################
+            self.left.fit(best_left_X,best_left_y)
+            self.right.fit(best_right_X,best_right_y)
+            self.split_id = best_split_id
+            self.split_value = best_split_value
+            self.loss = best_loss
+        else: 
+            self.is_leaf = True
+            self.value = self.leaf_value_estimator(y)
+        
+        #print(self.split_id, self.split_value)
+        return self
+
+    def predict_instance(self, instance):
+        '''
+        Predict label by decision tree
+
+        :param instance: a numpy array with new data, shape (1, m)
+
+        :return whatever is returned by leaf_value_estimator for leaf containing instance
+        '''
+        if self.is_leaf:
+            return self.value
+        if instance[self.split_id] <= self.split_value:
+            #print('split at x[%s]<=%s'%(self.split_id,self.split_value))
+            return self.left.predict_instance(instance)
+        else:
+            return self.right.predict_instance(instance)
+\end{minted}
+
+\pagebreak
+\item {[}Optional{]} Complete either the compute\_entropy or compute\_gini
+functions. Run the code provided that builds trees for the two-dimensional
+classification data. Include the results. For debugging, you may want
+to compare results with sklearn's decision tree. For visualization,
+you'll need to install graphviz.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5.1Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+\textbf{The following ae codes for entropy and gini index loss and the result of decision tree implementation on classification data}
+\begin{minted}{python}
+def compute_entropy(label_array):
+    '''
+    Calulate the entropy of given label list
+    
+    :param label_array: a numpy array of labels shape = (n, 1)
+    :return entropy: entropy value
+    '''
+    n_classes = np.unique(label_array)
+    entropy = 0
+    for label in n_classes:
+        p = np.sum(label_array==label)/float(len(label_array))
+        entropy += -p*np.log(p)
+    return entropy
+
+def compute_gini(label_array):
+    '''
+    Calulate the gini index of label list
+    
+    :param label_array: a numpy array of labels shape = (n, 1)
+    :return gini: gini index value
+    '''
+    n_classes = np.unique(label_array)
+    gini = 0
+    for label in n_classes:
+        p = np.sum(label_array==label)/len(label_array)
+        gini += p*(1-p)
+    return gini
+\end{minted}
+\begin{figure}[ht]
+\caption{Decition Tree with entropy loss implemented}
+\includegraphics[width=\textwidth]{DT_entropy.png}
+\end{figure}
+
+\pagebreak
+\text{  }
+\\
+\pagebreak
+\item {[}Optional{]} Complete the function mean\_absolute\_deviation\_around\_median
+(MAE). Use the code provided to fit the Regression\_Tree to the krr
+dataset using both the MAE loss and median predictions. Include the
+plots for the 6 fits.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 5.1Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\\
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+\textbf{The following are codes for MAE loss and the results of decision tree implemented on regression data}\\
+\begin{minted}{python}
+# Regression Tree Specific Code
+def mean_absolute_deviation_around_median(y):
+    '''
+    Calulate the mean absolute deviation around the median of a given target list
+    
+    :param y: a numpy array of targets shape = (n, 1)
+    :return mae
+    '''
+    # Your code goes here
+    median = np.median(y)
+    mae = np.mean(np.abs(y-median))
+    return mae
+\end{minted}
+\begin{figure}
+\caption{Decision Tree regression with MAE loss implemented}
+\includegraphics[width=\textwidth]{DT_regression.png}
+\end{figure}
+\end{enumerate}
+
+\pagebreak
 \section{Gradient Boosting Implementation}
 
 This method goes by many names, including gradient boosting machines
@@ -659,7 +1016,24 @@ consider the standard regression setting with square loss.
 	gradient boosting models on the classification and regression data
 	sets, and include the plots generated. Note that we are using square
 	loss to fit the classification data, as well as the regression data.
-	
+\include{file}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 6.1 Answer
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\rule{14.3cm}{2pt}\\
+\textbf{Answer:}\\
+\text{Result:}
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{GBM_l2.png}
+\caption{Gradient Boosting Tree with l2-loss}
+\end{figure}
+
+\begin{figure}[ht]
+\includegraphics[width=\textwidth]{GBM_regression.png}
+\caption{Gradient Boosting Regression}
+\end{figure}
+\textbf{Following is my result and code for GBM:}
+
 \begin{minted}{python}
 class gradient_boosting():
  '''
@@ -740,6 +1114,23 @@ class gradient_boosting():
 	or hinge loss. Include the new code and plots of your results. Note
 	that you should still use the same regression tree settings for the
 	base regression algorithm. 
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	% 6.1 Answer
+	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\noindent\rule{14.3cm}{2pt}\\
+	\textbf{Answer:}\\
+	\text{Result:}\\
+	\begin{figure}[ht]
+	\caption{Gradient Boosting Tree with logistic lost}
+	\includegraphics[width=\textwidth]{GBM_logistic.png}
+	\end{figure}
+	\begin{minted}{python}
+	def pseudo_residual_logistic(train_target,train_predict):
+	    y = train_target
+	    fx = train_predict
+	    m = y*fx
+	    return (y*np.exp(-m))/(1+np.exp(-m))
+	\end{minted}
 \end{enumerate}
 
 
